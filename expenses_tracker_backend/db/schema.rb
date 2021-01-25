@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_01_25_230926) do
 
   create_table "expenses", force: :cascade do |t|
     t.float "amount"
-    t.date "date"
+    t.string "date"
     t.string "description"
     t.integer "user_id"
     t.integer "category_id"
