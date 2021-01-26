@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Expense.destroy_all
 User.destroy_all
 Category.destroy_all
 
@@ -24,6 +25,6 @@ e12 = Expense.create(amount: 80.80, date: "01/01/2021", description: "Food", cat
 e13 = Expense.create(amount: 18.00, date: "01/20/2021", description: "Lunch", category_id: c4.id, user_id: u1.id)
 e21 = Expense.create(amount: 2500.00, date: "01/30/2021", description: "Rent", category_id: c5.id, user_id: u2.id)
 e22 = Expense.create(amount: 200.00, date: "01/15/2021", description: "Utilities", category_id: c3.id, user_id: u2.id)
-e23 = Expense.create(amount: 135.00, date: "02/15/2021", description: "Flight to SEA", category_id: c1.id, user_id: u1.id)
+e23 = Expense.create(amount: 135.00, date: "02/15/2021", description: "Flight to SEA", category_id: c1.id, user_id: u2.id)
 
 puts 'done'
