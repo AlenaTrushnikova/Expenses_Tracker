@@ -1,13 +1,13 @@
 class ExpensesController < ApplicationController
-  # def index
-  #   expenses = Expense.all
-  #   render json: expenses
-  # end
-  #
-  # def show
-  #   expense = Expense.find_by(params[:id])
-  #   render json: expense
-  # end
+  def index
+    expenses = Expense.all
+    render json: expenses
+  end
+  
+  def show
+    expense = Expense.find_by(id: params[:id])
+    render json: expense, include: :category
+  end
   #
   # def edit
   #   expense = Expense.find_by(id: params[:id])
