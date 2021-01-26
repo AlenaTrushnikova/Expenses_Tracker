@@ -1678,3 +1678,50 @@ No serializer found for resource: {:category_id=>14, :amount=>25.65, :category_n
 Completed 200 OK in 30ms (Views: 0.6ms | ActiveRecord: 2.2ms | Allocations: 15661)
 
 
+Started GET "/" for ::1 at 2021-01-26 09:11:43 -0800
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/at/.rvm/gems/ruby-2.6.1/gems/railties-6.1.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/at/.rvm/gems/ruby-2.6.1/gems/railties-6.1.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 12.3ms | Allocations: 378)
+Completed 200 OK in 29ms (Views: 17.2ms | ActiveRecord: 0.0ms | Allocations: 2590)
+
+
+Started GET "/favicon.ico" for ::1 at 2021-01-26 09:11:43 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 09:11:52 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :category_name=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.29ms)
+Completed 200 OK in 60ms (Views: 2.6ms | ActiveRecord: 4.7ms | Allocations: 19126)
+
+
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 09:12:38 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>15, :amount=>2500.0, :category_name=>"Housing"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.11ms)
+Completed 200 OK in 7ms (Views: 0.6ms | ActiveRecord: 0.8ms | Allocations: 2588)
+
+
