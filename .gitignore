@@ -1,2 +1,3 @@
 .idea/*
 expenses_tracker_backend/tmp/*
+expenses_tracker_backend/log/*

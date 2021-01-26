@@ -25,7 +25,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
             </div>
-            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Set monthly budget">
+            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+                   placeholder="Set monthly budget">
             <div class="input-group-append">
                 <span class="input-group-text">.00</span>
             </div>
@@ -35,6 +36,7 @@
     </div>
 
     <div>Form to submit expense</div>
+
     <div id="grouped-expenses">
         <h2>Expenses by category</h2>
         <table class="table table-success table-striped">
@@ -46,10 +48,30 @@
             </thead>
             <tbody id="grouped-expenses-body">
             </tbody>
-        </table
-    </div> <br>
+        </table>
+    </div>
+    <br>
 
-    <div>Table with ALL expenses + edit and delete btns</div>
+    <h2>Detailed Expenses Info</h2>
+    <div id='user-expenses'>
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">Description</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
+                <th scope="col">Category</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+
+            </tr>
+            </thead>
+            <tbody id='expenses-table-body'>
+
+            </tbody>
+        </table>
+    </div>
+
 </main>
 
 

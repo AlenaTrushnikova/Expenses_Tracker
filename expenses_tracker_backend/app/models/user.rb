@@ -29,5 +29,9 @@ class User < ApplicationRecord
     {categories: grouped_categories, totalAmount: total_amount}
   end
 
+  def getCategoryName(id)
+    self.categories.find(id).name
+  end
+
 end
 
