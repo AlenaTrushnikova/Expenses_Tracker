@@ -1,8 +1,6 @@
-//const proxyurl = "https://cors-anywhere.herokuapp.com/"
 const usersURL = 'http://localhost:3000/users'
 
 getUserExpenses(5)
-//addExpenseToTable()
 
 function getUserExpenses(id){
 
@@ -10,23 +8,34 @@ function getUserExpenses(id){
     .then(res => res.json())
     .then(user => {
         user.expenses.forEach(expense => addExpenseToTable(expense))
-    }
+    })
 }
 
 function addExpenseToTable(expense){
-
+    console.log('here', expense)
     let tableBody = document.getElementById('expenses-table-body')
+    let tr = document.createElement('tr')
 
-    let description = document.createElement('tr')
-    let amount = document.createElement('tr')
-    let date = document.createElement('tr')
-    let category = document.createElement('tr')
+    let description = document.createElement('td')
+    let amount = document.createElement('td')
+    let date = document.createElement('td')
+    let category = document.createElement('td')
+    let editBtn = document.createElement('button')
+    let deleteBtn = document.createElement('button')
 
-    description.textContent = exp.description
-    amount.textContent = exp.amount
-    date.textContent = exp.date
-    category.textContent = exp.category
+    tr.id = `expense-${expense.id}`
+    editBtn.id = `edit-exp-${expense.id}`
+    deleteBtn.id = `delete-exp-${expense.id}`
 
-    tableBody.append(description, amount, date, category)
+    editBtn.textContent = 'Edit'
+    deleteBtn.textContent = 'Delete'
+
+    description.textContent = expense.description
+    amount.textContent = `$${expense.amount}`
+    date.textContent = expense.date
+    category.textContent = expense.category.name
+
+    tr.append(description, amount, date, category, editBtn, deleteBtn)
+    tableBody.appendChild(tr)
 
 }
