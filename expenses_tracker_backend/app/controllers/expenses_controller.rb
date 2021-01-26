@@ -18,7 +18,7 @@ class ExpensesController < ApplicationController
   #   expense.update(amount: params[:amount], date: params[:date], description: params[:description], user_id: params[:user_id], category_id: params[:category_id])
   #   render json: expense
   # end
-  #
+
   # def create
   #   expense = Expense.create(amount: params[:amount], date: params[:date], description: params[:description], user_id: params[:user_id], category_id: params[:category_id])
   #   render json: expense
