@@ -14,30 +14,64 @@
 
 <header>
     <div>
-        Put header here
+        Expenses Tracker
     </div>
 </header>
 
 <main role="main" class="container">
-    <div>Budget $$ edit-btn</div>
-    <div>Form to submit expense</div>
-    <div>Table with expenses by category</div>
-    <div id = 'user-expenses'><table>
-        <thead>
-          <tr>
-            <th scope="col">Description</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Date</th>
-            <th scope="col">Category</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+    <div>
+        <h3>Budget: </h3>
+        <div class="input-group mb-3" id="budget">
+            <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+                   placeholder="Set monthly budget">
+            <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+            </div>
+            <button class="comment-button" type="submit" id="budget-submit">Submit</button>
+            <button class="comment-button" type="submit" id="budget-edit">Edit</button>
+        </div>
+    </div>
 
-          </tr>
-        </thead>
-        <tbody id = 'expenses-table-body'>
-                
-        </tbody>
-      </table></div>
+    <div>Form to submit expense</div>
+
+    <div id="grouped-expenses">
+        <h2>Expenses by category</h2>
+        <table class="table table-success table-striped">
+            <thead>
+            <tr>
+                <th style="width:60%" scope="col">Category</th>
+                <th style="width:40%" scope="col">Total Amount</th>
+            </tr>
+            </thead>
+            <tbody id="grouped-expenses-body">
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+    <h2>Detailed Expenses Info</h2>
+    <div id='user-expenses'>
+        <table>
+            <thead>
+            <tr>
+                <th scope="col">Description</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
+                <th scope="col">Category</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+
+            </tr>
+            </thead>
+            <tbody id='expenses-table-body'>
+
+            </tbody>
+        </table>
+    </div>
+
 </main>
 
 
@@ -46,7 +80,7 @@
         <span class="text-light">© 2021 [Alena Trushnikova <a href=<%="https://github.com/AlenaTrushnikova"%>gthb</a> <a
                 href=<%="https://www.linkedin.com/in/atrushnikova/"%>lnkd</a> ] &nbsp;  [Juan Carlos Meza <a
                 href=<%="https://github.com/juancmeza"%>gthb</a> <a
-                href=<%="https://www.linkedin.com/in/mitchell-gilbert-081794a0/"%>lnkd</a> ] </span>
+                href=<%="https://www.linkedin.com/in/juan-meza-36065974/"%>lnkd</a> ] </span>
     </div>
 </footer>
 </body>
