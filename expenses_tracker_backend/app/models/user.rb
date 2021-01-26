@@ -20,12 +20,13 @@ class User < ApplicationRecord
           end
           if !found
             category_name = Category.find_by(id: category)[:name]
-            grouped_categories.push({ category_id: category, amount: expense[:amount], category_name: category_name})
+            grouped_categories.push({ category_id: category, amount: expense[:amount], categoryName: category_name})
           end
         end
       end
     end
-    grouped_categories
+    total_amount = grouped_categories.map{|category| category[:amount]}.sum.round(2)
+    {categories: grouped_categories, totalAmount: total_amount}
   end
 
 end

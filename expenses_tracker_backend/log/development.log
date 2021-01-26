@@ -1725,3 +1725,1708 @@ No serializer found for resource: {:category_id=>15, :amount=>2500.0, :category_
 Completed 200 OK in 7ms (Views: 0.6ms | ActiveRecord: 0.8ms | Allocations: 2588)
 
 
+Started GET "/users/expenses_by_categories/" for ::1 at 2021-01-26 10:07:50 -0800
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"expenses_by_categories"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `show'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.16ms)
+Completed 200 OK in 20ms (Views: 4.4ms | ActiveRecord: 0.4ms | Allocations: 7777)
+
+
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 10:07:54 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>15, :amount=>2500.0, :category_name=>"Housing"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.29ms)
+Completed 200 OK in 85ms (Views: 1.1ms | ActiveRecord: 4.8ms | Allocations: 15981)
+
+
+Started GET "/users/expenses_by_categories/%7Buser.id%7D" for ::1 at 2021-01-26 10:23:49 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"{user"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", nil]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.7ms | Allocations: 1459)
+
+
+  
+NoMethodError (undefined method `expenses' for nil:NilClass):
+  
+app/models/user.rb:7:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/%7Buser.id%7D" for ::1 at 2021-01-26 10:23:55 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"{user"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", nil]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.2ms | Allocations: 956)
+
+
+  
+NoMethodError (undefined method `expenses' for nil:NilClass):
+  
+app/models/user.rb:7:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/%7Buser.id%7D" for ::1 at 2021-01-26 10:27:56 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"{user"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", nil]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.1ms | Allocations: 937)
+
+
+  
+NoMethodError (undefined method `expenses' for nil:NilClass):
+  
+app/models/user.rb:7:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/%7Buser.id%7D" for ::1 at 2021-01-26 10:27:57 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"{user"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", nil]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.2ms | Allocations: 937)
+
+
+  
+NoMethodError (undefined method `expenses' for nil:NilClass):
+  
+app/models/user.rb:7:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 10:30:41 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (2.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :category_name=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.14ms)
+Completed 200 OK in 14ms (Views: 0.8ms | ActiveRecord: 5.0ms | Allocations: 2202)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 10:31:25 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :category_name=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.15ms)
+Completed 200 OK in 9ms (Views: 0.8ms | ActiveRecord: 0.8ms | Allocations: 2150)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:06:21 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (1.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (1.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :category_name=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.14ms)
+Completed 200 OK in 17ms (Views: 0.9ms | ActiveRecord: 4.6ms | Allocations: 2674)
+
+
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 11:25:14 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>15, :amount=>2500.0, :categoryName=>"Housing"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.1ms)
+Completed 200 OK in 39ms (Views: 0.8ms | ActiveRecord: 2.2ms | Allocations: 14884)
+
+
+Started GET "/favicon.ico" for ::1 at 2021-01-26 11:25:14 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 11:25:34 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>15, :amount=>2500.0, :categoryName=>"Housing"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.21ms)
+Completed 200 OK in 11ms (Views: 0.9ms | ActiveRecord: 1.3ms | Allocations: 2821)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:28:36 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.23ms)
+Completed 200 OK in 8ms (Views: 0.9ms | ActiveRecord: 0.8ms | Allocations: 2149)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:29:59 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.16ms)
+Completed 200 OK in 8ms (Views: 0.7ms | ActiveRecord: 0.7ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:30:18 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.1ms)
+Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 0.6ms | Allocations: 2143)
+
+
+Started GET "/favicon.ico" for ::1 at 2021-01-26 11:30:18 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:30:50 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.8ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.19ms)
+Completed 200 OK in 13ms (Views: 1.3ms | ActiveRecord: 1.6ms | Allocations: 2146)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:31:26 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.22ms)
+Completed 200 OK in 10ms (Views: 1.3ms | ActiveRecord: 0.9ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:35:12 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.21ms)
+Completed 200 OK in 8ms (Views: 0.8ms | ActiveRecord: 0.8ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:35:13 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.14ms)
+Completed 200 OK in 7ms (Views: 0.7ms | ActiveRecord: 1.1ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:40:32 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.4ms)
+Completed 200 OK in 9ms (Views: 1.4ms | ActiveRecord: 0.9ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:41:06 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.11ms)
+Completed 200 OK in 7ms (Views: 0.6ms | ActiveRecord: 0.7ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:41:14 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.14ms)
+Completed 200 OK in 9ms (Views: 0.7ms | ActiveRecord: 1.3ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:41:52 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.4ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.15ms)
+Completed 200 OK in 10ms (Views: 0.7ms | ActiveRecord: 1.2ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:44:51 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.63ms)
+Completed 200 OK in 8ms (Views: 1.2ms | ActiveRecord: 1.0ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:46:15 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.13ms)
+Completed 200 OK in 7ms (Views: 0.6ms | ActiveRecord: 0.8ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:50:58 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.13ms)
+Completed 200 OK in 11ms (Views: 0.8ms | ActiveRecord: 2.4ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:15 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.25ms)
+Completed 200 OK in 8ms (Views: 1.0ms | ActiveRecord: 0.8ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:46 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.2ms)
+Completed 200 OK in 6ms (Views: 0.8ms | ActiveRecord: 0.7ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:46 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.15ms)
+Completed 200 OK in 8ms (Views: 0.7ms | ActiveRecord: 0.9ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:47 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.18ms)
+Completed 200 OK in 23ms (Views: 1.0ms | ActiveRecord: 0.8ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:47 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.1ms)
+Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 0.7ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:47 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.14ms)
+Completed 200 OK in 7ms (Views: 0.7ms | ActiveRecord: 0.8ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:47 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.15ms)
+Completed 200 OK in 9ms (Views: 0.9ms | ActiveRecord: 1.1ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:48 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.1ms)
+Completed 200 OK in 8ms (Views: 0.6ms | ActiveRecord: 1.0ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:49 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.1ms)
+Completed 200 OK in 7ms (Views: 0.6ms | ActiveRecord: 0.7ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:49 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.15ms)
+Completed 200 OK in 10ms (Views: 0.7ms | ActiveRecord: 0.9ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:49 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.15ms)
+Completed 200 OK in 10ms (Views: 0.9ms | ActiveRecord: 1.0ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:49 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.13ms)
+Completed 200 OK in 9ms (Views: 0.6ms | ActiveRecord: 0.9ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:51:49 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.16ms)
+Completed 200 OK in 8ms (Views: 0.9ms | ActiveRecord: 0.9ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:52:25 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.13ms)
+Completed 200 OK in 9ms (Views: 0.7ms | ActiveRecord: 1.0ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:55:55 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 4.8ms | Allocations: 15152)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/models/user.rb:27:in `block in grouped_expenses'
+app/models/user.rb:11:in `each'
+app/models/user.rb:11:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/favicon.ico" for ::1 at 2021-01-26 11:55:55 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:57:20 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 34ms (ActiveRecord: 4.0ms | Allocations: 15631)
+
+
+  
+NoMethodError (undefined method `sum' for 7.65:Float):
+  
+app/models/user.rb:26:in `block (2 levels) in grouped_expenses'
+app/models/user.rb:12:in `block in grouped_expenses'
+app/models/user.rb:11:in `each'
+app/models/user.rb:11:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 11:57:41 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.09ms)
+Completed 200 OK in 32ms (Views: 0.6ms | ActiveRecord: 3.8ms | Allocations: 15671)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:00:45 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.14ms)
+Completed 200 OK in 38ms (Views: 1.0ms | ActiveRecord: 3.1ms | Allocations: 15611)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:00:46 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.11ms)
+Completed 200 OK in 6ms (Views: 0.6ms | ActiveRecord: 0.5ms | Allocations: 2143)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:02:44 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 4.3ms | Allocations: 16210)
+
+
+  
+NoMethodError (undefined method `push' for {}:Hash):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:03:20 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 3.2ms | Allocations: 16225)
+
+
+  
+NoMethodError (undefined method `<<' for {}:Hash
+Did you mean?  <):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:03:21 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.4ms | Allocations: 2831)
+
+
+  
+NoMethodError (undefined method `<<' for {}:Hash
+Did you mean?  <):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:04:13 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 2.6ms | Allocations: 16229)
+
+
+  
+NoMethodError (undefined method `<<' for {}:Hash
+Did you mean?  <):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:04:15 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.6ms | Allocations: 2830)
+
+
+  
+NoMethodError (undefined method `<<' for {}:Hash
+Did you mean?  <):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:06:01 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 2.4ms | Allocations: 16211)
+
+
+  
+NoMethodError (undefined method `push' for {}:Hash):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:06:02 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.4ms | Allocations: 2816)
+
+
+  
+NoMethodError (undefined method `push' for {}:Hash):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:06:03 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.6ms | Allocations: 2816)
+
+
+  
+NoMethodError (undefined method `push' for {}:Hash):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:06:03 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.6ms | Allocations: 2816)
+
+
+  
+NoMethodError (undefined method `push' for {}:Hash):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:06:03 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.6ms | Allocations: 2816)
+
+
+  
+NoMethodError (undefined method `push' for {}:Hash):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:06:13 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:categories=>[{:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}, {:category_id=>12, :amount=>80.8, :categoryName=>"Grocery"}], :totalAmount=>100}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.17ms)
+Completed 200 OK in 43ms (Views: 0.9ms | ActiveRecord: 3.9ms | Allocations: 15705)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:07:07 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:categories=>[{:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}, {:category_id=>12, :amount=>80.8, :categoryName=>"Grocery"}], :totalAmount=>100}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.09ms)
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.4ms | Allocations: 2180)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:07:08 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:categories=>[{:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}, {:category_id=>12, :amount=>80.8, :categoryName=>"Grocery"}], :totalAmount=>100}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.14ms)
+Completed 200 OK in 21ms (Views: 0.8ms | ActiveRecord: 0.4ms | Allocations: 2181)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:08:59 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 3.3ms | Allocations: 15399)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:09:18 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 3.0ms | Allocations: 15404)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/models/user.rb:29:in `block in grouped_expenses'
+app/models/user.rb:29:in `each'
+app/models/user.rb:29:in `map'
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:09:19 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.5ms | Allocations: 1999)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/models/user.rb:29:in `block in grouped_expenses'
+app/models/user.rb:29:in `each'
+app/models/user.rb:29:in `map'
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:09:20 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.6ms | Allocations: 1999)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/models/user.rb:29:in `block in grouped_expenses'
+app/models/user.rb:29:in `each'
+app/models/user.rb:29:in `map'
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:09:20 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.6ms | Allocations: 1999)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/models/user.rb:29:in `block in grouped_expenses'
+app/models/user.rb:29:in `each'
+app/models/user.rb:29:in `map'
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:09:20 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.5ms | Allocations: 1999)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/models/user.rb:29:in `block in grouped_expenses'
+app/models/user.rb:29:in `each'
+app/models/user.rb:29:in `map'
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:09:21 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.5ms | Allocations: 1999)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/models/user.rb:29:in `block in grouped_expenses'
+app/models/user.rb:29:in `each'
+app/models/user.rb:29:in `map'
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 12:09:35 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 37ms (ActiveRecord: 3.3ms | Allocations: 15817)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/models/user.rb:29:in `block in grouped_expenses'
+app/models/user.rb:29:in `each'
+app/models/user.rb:29:in `map'
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 12:09:44 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.8ms | Allocations: 2412)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/models/user.rb:29:in `block in grouped_expenses'
+app/models/user.rb:29:in `each'
+app/models/user.rb:29:in `map'
+app/models/user.rb:29:in `grouped_expenses'
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 12:09:44 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:categories=>[{:category_id=>15, :amount=>2500.0, :categoryName=>"Housing"}, {:category_id=>13, :amount=>200.0, :categoryName=>"Bills and Utilities"}, {:category_id=>11, :amount=>135.0, :categoryName=>"Travel"}], :totalAmount=>1000}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.25ms)
+Completed 200 OK in 48ms (Views: 1.3ms | ActiveRecord: 4.4ms | Allocations: 16160)
+
+
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 12:54:32 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:categories=>[{:category_id=>15, :amount=>2500.0, :categoryName=>"Housing"}, {:category_id=>13, :amount=>200.0, :categoryName=>"Bills and Utilities"}, {:category_id=>11, :amount=>135.0, :categoryName=>"Travel"}], :totalAmount=>1000}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.18ms)
+Completed 200 OK in 9ms (Views: 0.8ms | ActiveRecord: 2.2ms | Allocations: 3158)
+
+
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 12:57:00 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:categories=>[{:category_id=>15, :amount=>2500.0, :categoryName=>"Housing"}, {:category_id=>13, :amount=>200.0, :categoryName=>"Bills and Utilities"}, {:category_id=>11, :amount=>135.0, :categoryName=>"Travel"}], :totalAmount=>2835.0}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.14ms)
+Completed 200 OK in 42ms (Views: 0.6ms | ActiveRecord: 3.7ms | Allocations: 16167)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:57:58 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:categories=>[{:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}, {:category_id=>12, :amount=>80.8, :categoryName=>"Grocery"}], :totalAmount=>106.44999999999999}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.18ms)
+Completed 200 OK in 11ms (Views: 2.1ms | ActiveRecord: 0.9ms | Allocations: 2186)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:58:58 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:categories=>[{:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}, {:category_id=>12, :amount=>80.8, :categoryName=>"Grocery"}], :totalAmount=>106.44999999999999}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.15ms)
+Completed 200 OK in 9ms (Views: 0.8ms | ActiveRecord: 0.6ms | Allocations: 2186)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 12:59:27 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+No serializer found for resource: {:categories=>[{:category_id=>14, :amount=>25.65, :categoryName=>"Restaurants and Cafes"}, {:category_id=>12, :amount=>80.8, :categoryName=>"Grocery"}], :totalAmount=>106.44999999999999}
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Array (0.18ms)
+Completed 200 OK in 6ms (Views: 0.9ms | ActiveRecord: 0.7ms | Allocations: 2186)
+
+
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 13:00:35 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.5ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:10:in `map'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:23:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+Completed 200 OK in 33ms (Views: 0.7ms | ActiveRecord: 3.8ms | Allocations: 16089)
+
+
+Started GET "/favicon.ico" for ::1 at 2021-01-26 13:00:35 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 13:00:44 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+Completed 200 OK in 32ms (Views: 0.6ms | ActiveRecord: 2.7ms | Allocations: 16131)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:00:52 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.21ms)
+Completed 200 OK in 8ms (Views: 1.1ms | ActiveRecord: 0.9ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:16:02 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.9ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.13ms)
+Completed 200 OK in 10ms (Views: 0.6ms | ActiveRecord: 2.4ms | Allocations: 2674)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:16:03 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.26ms)
+Completed 200 OK in 12ms (Views: 0.9ms | ActiveRecord: 2.3ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:16:36 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+Completed 200 OK in 6ms (Views: 0.6ms | ActiveRecord: 0.5ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:20:09 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.17ms)
+Completed 200 OK in 8ms (Views: 0.7ms | ActiveRecord: 0.8ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:27:37 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.8ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.17ms)
+Completed 200 OK in 17ms (Views: 0.9ms | ActiveRecord: 5.1ms | Allocations: 2674)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:27:38 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 0.6ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:27:55 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.19ms)
+Completed 200 OK in 8ms (Views: 1.4ms | ActiveRecord: 0.7ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:28:41 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.27ms)
+Completed 200 OK in 8ms (Views: 0.9ms | ActiveRecord: 0.9ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:28:42 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.18ms)
+Completed 200 OK in 8ms (Views: 0.8ms | ActiveRecord: 0.8ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:29:00 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.18ms)
+Completed 200 OK in 7ms (Views: 0.7ms | ActiveRecord: 0.8ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:29:01 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.4ms | Allocations: 2152)
+
+
+Started GET "/users/expenses_by_categories/6" for ::1 at 2021-01-26 13:29:42 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 6]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 6]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.6ms | Allocations: 2595)
+
+
+Started GET "/favicon.ico" for ::1 at 2021-01-26 13:29:43 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:29:44 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.1ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Completed 200 OK in 5ms (Views: 0.5ms | ActiveRecord: 0.4ms | Allocations: 2150)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:29:54 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.3ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 0.9ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:30:54 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.17ms)
+Completed 200 OK in 6ms (Views: 0.7ms | ActiveRecord: 0.6ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:30:56 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.2ms)
+Completed 200 OK in 9ms (Views: 0.7ms | ActiveRecord: 0.9ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:31:44 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.19ms)
+Completed 200 OK in 8ms (Views: 0.7ms | ActiveRecord: 0.8ms | Allocations: 2151)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:31:55 -0800
+Processing by UsersController#expenses_by_categories as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.19ms)
+Completed 200 OK in 7ms (Views: 0.9ms | ActiveRecord: 0.7ms | Allocations: 2147)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:32:55 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.7ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.16ms)
+Completed 200 OK in 46ms (Views: 0.9ms | ActiveRecord: 3.8ms | Allocations: 15690)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:33:39 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+Completed 500 Internal Server Error in 2ms (Allocations: 250)
+
+
+  
+SyntaxError (/Users/at/Documents/Flatiron/project_mod3/Expenses_Tracker/expenses_tracker_backend/app/models/user.rb:18: syntax error, unexpected tOP_ASGN, expecting end
+...d_category[:amount].round(2) += expense[:amount].round(2)
+...                             ^~):
+  
+app/models/user.rb:18: syntax error, unexpected tOP_ASGN, expecting end
+app/models/user.rb:18: syntax error, unexpected tOP_ASGN, expecting end
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:33:40 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+Completed 500 Internal Server Error in 1ms (Allocations: 237)
+
+
+  
+SyntaxError (/Users/at/Documents/Flatiron/project_mod3/Expenses_Tracker/expenses_tracker_backend/app/models/user.rb:18: syntax error, unexpected tOP_ASGN, expecting end
+...d_category[:amount].round(2) += expense[:amount].round(2)
+...                             ^~):
+  
+app/models/user.rb:18: syntax error, unexpected tOP_ASGN, expecting end
+app/models/user.rb:18: syntax error, unexpected tOP_ASGN, expecting end
+app/controllers/users_controller.rb:14:in `expenses_by_categories'
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:33:48 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.6ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+Completed 200 OK in 43ms (Views: 0.6ms | ActiveRecord: 4.7ms | Allocations: 15689)
+
+
+Started GET "/users/expenses_by_categories/5" for ::1 at 2021-01-26 13:35:35 -0800
+Processing by UsersController#expenses_by_categories as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 5]]
+  ↳ app/models/user.rb:6:in `grouped_expenses'
+  [1m[36mExpense Load (0.2ms)[0m  [1m[34mSELECT "expenses".* FROM "expenses" WHERE "expenses"."user_id" = ?[0m  [["user_id", 5]]
+  ↳ app/models/user.rb:9:in `map'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:22:in `block (2 levels) in grouped_expenses'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.16ms)
+Completed 200 OK in 9ms (Views: 1.3ms | ActiveRecord: 1.2ms | Allocations: 2151)
+
+
