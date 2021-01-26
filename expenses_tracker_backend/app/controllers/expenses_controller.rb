@@ -4,10 +4,7 @@ class ExpensesController < ApplicationController
   #   render json: expenses
   # end
   #
-  # def show
-  #   expense = Expense.find_by(params[:id])
-  #   render json: expense
-  # end
+
   #
   # def edit
   #   expense = Expense.find_by(id: params[:id])

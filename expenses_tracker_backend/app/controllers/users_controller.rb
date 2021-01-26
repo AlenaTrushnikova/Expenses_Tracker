@@ -10,6 +10,11 @@ class UsersController < ApplicationController
     render json: user
   end
 
+  def expenses_by_categories
+    grouped_expenses = User.grouped_expenses(params[:id])
+    render json: grouped_expenses
+  end
+
   # def create
   #   user = User.find_or_create_by(name: params[:name], budget: params[:budget])
   #   render json: user
