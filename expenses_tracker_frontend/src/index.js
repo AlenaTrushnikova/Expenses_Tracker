@@ -6,7 +6,8 @@ const BASE_URL = "http://localhost:3000"
 const USERS_URL = `${BASE_URL}/users`
 const GROUPED_EXPENSES_URL = `${USERS_URL}/expenses_by_categories`
 const CATEGORIES_URL = `${BASE_URL}/categories`
-var User = {};
+const EXPENSES_URL = `${BASE_URL}/expenses`
+var User = {}
 // User['id'] = 5;
 // User['name'] = 'Alena';
 // User['budget'] = 10000.00;
@@ -22,7 +23,7 @@ function buildGroupedExpenses(user) {
 
 function categoriesTable(groupedCategories) {
     let body = document.querySelector('#grouped-expenses-body')
-
+    body.innerHTML = ""
     groupedCategories.categories.forEach(category => {
         let catRow = document.createElement('tr')
         let categoryName = document.createElement('td')
@@ -88,14 +89,16 @@ function addExpenseToTable(expense) {
     tableBody.appendChild(tr)
 }
 
-function deleteExpense(id){
-    fetch(`http://localhost:3000/expenses/${id}`,{
+function deleteExpense(expenseId){
+    console.log(expenseId)
+    fetch(EXPENSES_URL + `/${expenseId}`,{
         method:'DELETE'
     })
         .then(res => res.json())
         .then(() => {
-            let expense = document.getElementById(`expense-${id}`)
+            let expense = document.getElementById(`expense-${expenseId}`)
             expense.remove()
+            buildGroupedExpenses(User)
         })
 }
 
@@ -220,11 +223,9 @@ function setupUI(user) {
     let loginForm = document.querySelector('#login-form')
     loginForm.className = "hidden"
 
-    console.log(User)
-
     buildGroupedExpenses(User)
     getUserExpenses(User)
     displayBudget(User)
     editBudget()
-    addCategoriesToForm()
+    // addCategoriesToForm()
 }
