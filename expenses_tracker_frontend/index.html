@@ -10,7 +10,7 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script defer src='src/index.js'></script>
 </head>
-<body>
+<body class="bg-dark text-light">
 
 <header>
     <nav class="navbar navbar-light bg-dark">
@@ -18,7 +18,7 @@
             <div class="navbar-brand mb-0 h1 text-light">
                 <span class="logo">
                     <svg width="80.562802653712716" height="48.562802653712716"
-                     viewBox="0 0 48.562802653712716 48.562802653712716" class="css-1j8o68f">
+                         viewBox="0 0 48.562802653712716 48.562802653712716" class="css-1j8o68f">
                     <defs id="SvgjsDefs4717"></defs>
                     <g id="SvgjsG4718" featurekey="Df7oLJ-0"
                        transform="matrix(1.3465910957867424,0,0,1.3465910957867424,-1.8621024233089138,-9.38363676230878)"
@@ -34,7 +34,7 @@
                 </span>
                 Expenses Tracker
             </div>
-            <div class="navbar-brand mb-0 text-light">
+            <div class="hidden navbar-brand mb-0 text-light" id="user-info">
                 Hi, User Name
                 <button class="btn btn-secondary btn-sm" type="button" id="user-logout">Log Out</button>
                 <button class="btn btn-dark btn-sm" type="button" id="user-delete">Delete Account</button>
@@ -43,20 +43,24 @@
     </nav>
 </header>
 
-<main role="main" class="container">
-    <div style="display: flex; justify-content: flex-end"> <h3>Budget</h3></div>
-    <div class="budget" style="display: flex; justify-content: flex-end">
+<main role="main" class="hidden container">
+    <div style="display: flex; justify-content: flex-end">
+        <h4 id="budget-amount"></h4> &nbsp; &nbsp;
+        <button class="btn btn-outline-light btn-sm" type="button" id="budget-edit">Edit</button>
+    </div>
+    <br>
+    <div class="budget hidden" style="justify-content: flex-end">
         <div class="input-group mb-3" id="budget" style="width:40%">
             <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
             </div>
             <input type="text" class="form-control input-sm" aria-label="Amount (to the nearest dollar)"
-                   placeholder="Set monthly budget">
+                   placeholder="Set monthly budget" id="set-budget-input">
             <div class="input-group-append">
                 <span class="input-group-text">.00</span>
             </div>
+
             <button class="btn btn-outline-success" type="button" id="budget-submit">Submit</button>
-            <button class="btn btn-outline-dark" type="button" id="budget-edit">Edit</button>
         </div>
     </div>
 
@@ -64,7 +68,7 @@
 
     <div id="grouped-expenses">
         <h2>Expenses by category</h2>
-        <table class="table table-light table-striped" style="width:60%">
+        <table class="table table-success table-striped" style="width:60%">
             <thead>
             <tr>
                 <th style="width:60%" scope="col">Category</th>
@@ -80,16 +84,15 @@
 
     <div id='user-expenses'>
         <h2>Detailed Expenses Info</h2>
-        <table class="table table-light table-striped">
+        <table class="table table-success table-striped">
             <thead>
             <tr>
                 <th style="width:15%" scope="col">Description</th>
-                <th style="width:10%" scope="col">Amount</th>
+                <th style="width:15%" scope="col">Amount</th>
                 <th style="width:15%" scope="col">Date</th>
-                <th style="width:40%" scope="col">Category</th>
+                <th style="width:35%" scope="col">Category</th>
                 <th style="width:10%" scope="col"></th>
                 <th style="width:10%" scope="col"></th>
-
             </tr>
             </thead>
             <tbody id='expenses-table-body'>

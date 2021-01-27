@@ -20,10 +20,10 @@ class UsersController < ApplicationController
   #   render json: user
   # end
   #
-  # def update
-  #   user = User.update(name: params[:name], budget: params[:budget])
-  #   render json: user
-  # end
+  def update
+    user = User.find_by(id: params[:id]).update(budget: params[:budget])
+    render json: user
+  end
   #
   # def destroy
   #   user = User.find_by(id: params[:id])

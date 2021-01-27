@@ -1,15 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
     buildGroupedExpenses(User)
     getUserExpenses(User)
+    displayBudget(User)
+    editBudget()
 })
 
 const BASE_URL = "http://localhost:3000"
 const USERS_URL = `${BASE_URL}/users`
 const GROUPED_EXPENSES_URL = `${USERS_URL}/expenses_by_categories`
 const User = {};
-User['id'] = 6;
+User['id'] = 5;
 User['name'] = 'Alena';
-User['budget'] = 1000.00;
+User['budget'] = 10000.00;
 
 
 
@@ -28,7 +30,7 @@ function categoriesTable(groupedCategories) {
         let categoryName = document.createElement('td')
         categoryName.textContent = category.categoryName
         let categoryAmount = document.createElement('td')
-        categoryAmount.textContent = `$ ${category.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+        categoryAmount.textContent = convertMoney(category.amount)
         catRow.append(categoryName, categoryAmount)
         body.append(catRow)
     })
@@ -38,7 +40,7 @@ function categoriesTable(groupedCategories) {
     expenseTotal.innerText = "Total Expenses"
     expenseTotal.className = "fw-bold"
     let expenseAmount = document.createElement('td')
-    expenseAmount.textContent = `$ ${groupedCategories.totalAmount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+    expenseAmount.textContent = convertMoney(groupedCategories.totalAmount)
     expenseAmount.className = "fw-bold"
     total.append(expenseTotal, expenseAmount)
     body.append(total)
@@ -77,7 +79,7 @@ function addExpenseToTable(expense) {
     deleteBtn.textContent = 'Delete'
 
     description.textContent = expense.description
-    amount.textContent = `$ ${expense.amount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+    amount.textContent = convertMoney(expense.amount)
     date.textContent = expense.date
     category.textContent = expense.category.name
     tdEditBtn.append(editBtn)
@@ -86,3 +88,60 @@ function addExpenseToTable(expense) {
     tableBody.appendChild(tr)
 }
 
+// Display Budget
+function displayBudget(user) {
+    let budgetAmount = document.querySelector('#budget-amount')
+    budgetAmount.textContent = 'Budget: ' + convertMoney(user.budget)
+    let budgetEditBtn = document.querySelector('#budget-edit')
+    budgetEditBtn.addEventListener('click', handleEdit)
+}
+function handleEdit (){
+    let budgetForm = document.querySelector('.budget')
+    if (budgetForm.classList.contains("hidden") == true) {
+        budgetForm.className = "budget flex"
+    } else
+        budgetForm.className = "budget hidden"
+}
+
+//Edit Budget
+function editBudget() {
+    let submitBudgetBtn = document.querySelector('#budget-submit')
+    submitBudgetBtn.addEventListener('click', handleSubmit)
+}
+
+function handleSubmit() {
+    let newBudget = document.querySelector('#set-budget-input').value
+    postBudget(newBudget)
+}
+
+function postBudget(newBudget) {
+    intBudget = parseInt(newBudget)
+    if (intBudget < 0 || newBudget === "") {
+        intBudget = 0
+    }
+    fetch(USERS_URL + `/${User.id}`,{
+        method: 'PATCH',
+        headers: {
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify({budget: intBudget})
+    })
+        .then(resp => resp.json())
+        .then(budget => {
+            let displayBudget = document.querySelector('#budget-amount')
+            displayBudget.textContent = 'Budget: ' + convertMoney(intBudget)
+            console.log(intBudget)
+            let newBudgetInput = document.querySelector('#set-budget-input')
+            newBudgetInput.value = ""
+        })
+}
+
+
+//Convert Int to $$
+function convertMoney(money) {
+    return `$ ${money.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+}
+
+function userLogin() {
+    
+}
