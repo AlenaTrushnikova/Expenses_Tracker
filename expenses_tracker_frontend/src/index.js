@@ -1,17 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
-    buildGroupedExpenses(User)
-    getUserExpenses(User)
+    userLogin()
 })
 
 const BASE_URL = "http://localhost:3000"
 const USERS_URL = `${BASE_URL}/users`
 const GROUPED_EXPENSES_URL = `${USERS_URL}/expenses_by_categories`
-const User = {};
-User['id'] = 5;
-User['name'] = 'Alena';
-User['budget'] = 1000.00;
+const CATEGORIES_URL = `${BASE_URL}/categories`
+var User = {};
+// User['id'] = 5;
+// User['name'] = 'Alena';
+// User['budget'] = 10000.00;
 
 
+
+//Expenses by Categories
 function buildGroupedExpenses(user) {
     fetch(GROUPED_EXPENSES_URL + `/${user.id}`)
         .then(resp => resp.json())
@@ -26,7 +28,7 @@ function categoriesTable(groupedCategories) {
         let categoryName = document.createElement('td')
         categoryName.textContent = category.categoryName
         let categoryAmount = document.createElement('td')
-        categoryAmount.textContent = category.amount
+        categoryAmount.textContent = convertMoney(category.amount)
         catRow.append(categoryName, categoryAmount)
         body.append(catRow)
     })
@@ -36,14 +38,13 @@ function categoriesTable(groupedCategories) {
     expenseTotal.innerText = "Total Expenses"
     expenseTotal.className = "fw-bold"
     let expenseAmount = document.createElement('td')
-    expenseAmount.textContent = groupedCategories.totalAmount
+    expenseAmount.textContent = convertMoney(groupedCategories.totalAmount)
     expenseAmount.className = "fw-bold"
     total.append(expenseTotal, expenseAmount)
     body.append(total)
 }
 
-
-
+//All Expenses
 function getUserExpenses(user) {
 
     fetch(`${USERS_URL}/${user.id}`)
@@ -54,7 +55,6 @@ function getUserExpenses(user) {
 }
 
 function addExpenseToTable(expense) {
-    console.log('here', expense)
     let tableBody = document.getElementById('expenses-table-body')
     let tr = document.createElement('tr')
 
@@ -62,22 +62,169 @@ function addExpenseToTable(expense) {
     let amount = document.createElement('td')
     let date = document.createElement('td')
     let category = document.createElement('td')
+    let tdEditBtn = document.createElement('td')
+    let tdDeleteBtn = document.createElement('td')
     let editBtn = document.createElement('button')
     let deleteBtn = document.createElement('button')
 
+    deleteBtn.addEventListener('click', () => deleteExpense(expense.id))
+
     tr.id = `expense-${expense.id}`
     editBtn.id = `edit-exp-${expense.id}`
+    editBtn.className = "btn btn-outline-success btn-sm"
     deleteBtn.id = `delete-exp-${expense.id}`
+    deleteBtn.className = "btn btn-outline-secondary btn-sm"
 
     editBtn.textContent = 'Edit'
     deleteBtn.textContent = 'Delete'
 
     description.textContent = expense.description
-    amount.textContent = `$${expense.amount}`
+    amount.textContent = convertMoney(expense.amount)
     date.textContent = expense.date
     category.textContent = expense.category.name
-
-    tr.append(description, amount, date, category, editBtn, deleteBtn)
+    tdEditBtn.append(editBtn)
+    tdDeleteBtn.append(deleteBtn)
+    tr.append(description, amount, date, category, tdEditBtn, tdDeleteBtn)
     tableBody.appendChild(tr)
 }
 
+function deleteExpense(id){
+    fetch(`http://localhost:3000/expenses/${id}`,{
+        method:'DELETE'
+    })
+        .then(res => res.json())
+        .then(() => {
+            let expense = document.getElementById(`expense-${id}`)
+            expense.remove()
+        })
+}
+
+function addEventListenerToExpenseForm(user){
+    let form = document.getElementById("expense-form")
+    form.id = user.id
+    form.addEventListener('submit', handleExpenseSubmit)
+}
+
+function handleExpenseSubmit(e){
+    e.preventDefault()
+    debugger
+    let id = parseInt(e.target.id)
+
+    let newExpense = {
+        categoryId: parseInt(e.target.children[7].value),
+        userId: id,
+        description: e.target.description.value,
+        amount: e.target.amount.value,
+        date: e.target.date.value
+    }
+
+    addNewExpense(newExpense)
+}
+
+function addNewExpense(expense){
+    fetch(`http://localhost:3000/expenses`,{
+        method:'POST',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify(expense)
+    })
+        .then(res => res.json())
+        .then(expense => addExpenseToTable(expense))
+}
+
+// Display Budget
+function displayBudget(user) {
+    let budgetAmount = document.querySelector('#budget-amount')
+    budgetAmount.textContent = 'Budget: ' + convertMoney(user.budget)
+    let budgetEditBtn = document.querySelector('#budget-edit')
+    budgetEditBtn.addEventListener('click', handleEdit)
+}
+function handleEdit (){
+    let budgetForm = document.querySelector('.budget')
+    if (budgetForm.classList.contains("hidden") == true) {
+        budgetForm.className = "budget flex"
+    } else
+        budgetForm.className = "budget hidden"
+}
+
+//Edit Budget
+function editBudget() {
+    let submitBudgetBtn = document.querySelector('#budget-submit')
+    submitBudgetBtn.addEventListener('click', handleSubmit)
+}
+
+function handleSubmit() {
+    let newBudget = document.querySelector('#set-budget-input').value
+    postBudget(newBudget)
+}
+
+function postBudget(newBudget) {
+    intBudget = parseInt(newBudget)
+    if (intBudget < 0 || newBudget === "") {
+        intBudget = 0
+    }
+    fetch(USERS_URL + `/${User.id}`,{
+        method: 'PATCH',
+        headers: {
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify({budget: intBudget})
+    })
+        .then(resp => resp.json())
+        .then(budget => {
+            let displayBudget = document.querySelector('#budget-amount')
+            displayBudget.textContent = 'Budget: ' + convertMoney(intBudget)
+            console.log(intBudget)
+            let newBudgetInput = document.querySelector('#set-budget-input')
+            newBudgetInput.value = ""
+        })
+}
+
+
+//Convert Int to $$
+function convertMoney(money) {
+    return `$ ${money.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+}
+
+function userLogin() {
+    let userLoginBtn = document.querySelector('#user-login')
+    userLoginBtn.addEventListener('click', handleLogin)
+}
+
+function handleLogin() {
+    let userName = document.querySelector('#user-name').value
+    if (userName == "") {
+        return
+    }
+    fetch(USERS_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify({'name': userName})
+    })
+        .then(resp => resp.json())
+        .then(user => setupUI(user))
+}
+
+function setupUI(user) {
+    User = user
+    let main = document.querySelector('#main')
+    main.className = "container"
+
+    let userInfo = document.querySelector('#user-info')
+    userInfo.className = "navbar-brand mb-0 text-light"
+
+    let loginForm = document.querySelector('#login-form')
+    loginForm.className = "hidden"
+
+    console.log(User)
+
+    buildGroupedExpenses(User)
+    getUserExpenses(User)
+    displayBudget(User)
+    editBudget()
+    addCategoriesToForm()
+}
