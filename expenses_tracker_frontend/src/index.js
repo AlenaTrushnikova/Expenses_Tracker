@@ -1,17 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    buildGroupedExpenses(User)
-    getUserExpenses(User)
-    displayBudget(User)
-    editBudget()
+    userLogin()
 })
 
 const BASE_URL = "http://localhost:3000"
 const USERS_URL = `${BASE_URL}/users`
 const GROUPED_EXPENSES_URL = `${USERS_URL}/expenses_by_categories`
-const User = {};
-User['id'] = 5;
-User['name'] = 'Alena';
-User['budget'] = 10000.00;
+var User = {};
+// User['id'] = 5;
+// User['name'] = 'Alena';
+// User['budget'] = 10000.00;
 
 
 
@@ -143,5 +140,41 @@ function convertMoney(money) {
 }
 
 function userLogin() {
-    
+    let userLoginBtn = document.querySelector('#user-login')
+    userLoginBtn.addEventListener('click', handleLogin)
+}
+
+function handleLogin() {
+    let userName = document.querySelector('#user-name').value
+    if (userName == "") {
+        return
+    }
+    fetch(USERS_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify({'name': userName})
+        })
+        .then(resp => resp.json())
+        .then(user => setupUI(user))
+}
+
+function setupUI(user) {
+    User = user
+    let main = document.querySelector('#main')
+    main.className = "container"
+
+    let userInfo = document.querySelector('#user-info')
+    userInfo.className = "navbar-brand mb-0 text-light"
+
+    let loginForm = document.querySelector('#login-form')
+    loginForm.className = "hidden"
+
+    console.log(User)
+
+    buildGroupedExpenses(User)
+    getUserExpenses(User)
+    displayBudget(User)
+    editBudget()
 }

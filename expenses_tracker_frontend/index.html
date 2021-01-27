@@ -43,7 +43,19 @@
     </nav>
 </header>
 
-<main role="main" class="hidden container">
+<div class="container" id="login-form">
+    <form>
+        <div class="mb-3">
+            <label class="form-label">User name</label>
+            <input type="text" class="form-control" id="user-name">
+            <div id="emailHelp" class="form-text">Enter existing user name or create a new user.</div>
+        </div>
+        <button type="submit" class="btn btn-success" id="user-login">Submit</button>
+    </form>
+
+</div>
+
+<main role="main" class="hidden container" id="main">
     <div style="display: flex; justify-content: flex-end">
         <h4 id="budget-amount"></h4> &nbsp; &nbsp;
         <button class="btn btn-outline-light btn-sm" type="button" id="budget-edit">Edit</button>
