@@ -89,8 +89,8 @@ function addExpenseToTable(expense) {
     tableBody.appendChild(tr)
 }
 
+//Delete Expenses and Update TWO tables (expenses by categories and detailed Info)
 function deleteExpense(expenseId){
-    console.log(expenseId)
     fetch(EXPENSES_URL + `/${expenseId}`,{
         method:'DELETE'
     })
@@ -102,6 +102,7 @@ function deleteExpense(expenseId){
         })
 }
 
+//Add new expense Form
 function addEventListenerToExpenseForm(user){
     let form = document.getElementById("expense-form")
     form.id = user.id
@@ -110,7 +111,6 @@ function addEventListenerToExpenseForm(user){
 
 function handleExpenseSubmit(e){
     e.preventDefault()
-    debugger
     let id = parseInt(e.target.id)
 
     let newExpense = {
@@ -179,7 +179,6 @@ function postBudget(newBudget) {
         .then(budget => {
             let displayBudget = document.querySelector('#budget-amount')
             displayBudget.textContent = 'Budget: ' + convertMoney(intBudget)
-            console.log(intBudget)
             let newBudgetInput = document.querySelector('#set-budget-input')
             newBudgetInput.value = ""
         })
@@ -227,5 +226,6 @@ function setupUI(user) {
     getUserExpenses(User)
     displayBudget(User)
     editBudget()
+    addEventListenerToExpenseForm(User)
     // addCategoriesToForm()
 }
