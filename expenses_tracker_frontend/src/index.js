@@ -103,10 +103,29 @@ function deleteExpense(expenseId){
 }
 
 //Add new expense Form
+
+
 function addEventListenerToExpenseForm(user){
     let form = document.getElementById("expense-form")
     form.id = user.id
     form.addEventListener('submit', handleExpenseSubmit)
+}
+function addCategoriesToForm(){
+    fetch(CATEGORIES_URL)
+        .then(res => res.json())
+        .then(categories => {
+            categories.forEach(cat => addCategory(cat))
+        })
+}
+
+function addCategory(category){
+    let select = document.querySelector('.form-select')
+    let option = document.createElement('option')
+
+    option.value = category.id
+    option.textContent = category.name
+
+    select.appendChild(option)
 }
 
 function handleExpenseSubmit(e){
@@ -117,7 +136,7 @@ function handleExpenseSubmit(e){
         categoryId: parseInt(e.target.children[7].value),
         userId: id,
         description: e.target.description.value,
-        amount: e.target.amount.value,
+        amount: parseFloat(e.target.amount.value),
         date: e.target.date.value
     }
 
@@ -228,5 +247,5 @@ function setupUI(user) {
     displayBudget(User)
     editBudget()
     addEventListenerToExpenseForm(User)
-    // addCategoriesToForm()
+    addCategoriesToForm()
 }
