@@ -141,6 +141,11 @@ function handleExpenseSubmit(e){
     }
 
     addNewExpense(newExpense)
+
+    e.target.description.value = ''
+    e.target.amount.value = ''
+    e.target.date.value = ''
+    e.target.children[7].value = 'Select a category'
 }
 
 function addNewExpense(expense){
@@ -153,7 +158,10 @@ function addNewExpense(expense){
         body: JSON.stringify(expense)
     })
         .then(res => res.json())
-        .then(expense => addExpenseToTable(expense))
+        .then(expense => {
+            addExpenseToTable(expense)
+            buildGroupedExpenses(User)
+        })
 }
 
 // Display Budget
