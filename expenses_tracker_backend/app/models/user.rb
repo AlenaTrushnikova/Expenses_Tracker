@@ -25,7 +25,7 @@ class User < ApplicationRecord
         end
       end
     end
-    total_amount = grouped_categories.map{|category| category[:amount]}.sum.round(2)
+    total_amount = grouped_categories.map{|category| category[:amount]}.sum
     {categories: grouped_categories, totalAmount: total_amount}
   end
 

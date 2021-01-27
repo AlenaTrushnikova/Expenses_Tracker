@@ -33,3 +33,8 @@ body > .container {
 code {
     font-size: 80%;
 }
+
+.logo {
+    padding-right: 10px;
+}
+
