@@ -249,6 +249,9 @@ function setupUI(user) {
     let loginForm = document.querySelector('#login-form')
     loginForm.className = "hidden"
 
+    let welcomeSpan = document.querySelector('#welcome-user')
+    welcomeSpan.textContent = "Hi, " + `${user.name}`
+
     buildGroupedExpenses(User)
     getUserExpenses(User)
     displayBudget(User)
@@ -268,3 +271,4 @@ function handleLogout(e) {
     e.preventDefault()
 
 }
+
