@@ -26,11 +26,11 @@ class ExpensesController < ApplicationController
   #   render json: expense
   # end
   #
-  # def destroy
-  #
-  #   expense = Expense.find_by(params[:id])
-  #   expense.destroy
-  #   render json: {"Message": "Expense was deleted"}
-  # end
+  def destroy
+  
+    expense = Expense.find_by(params[:id])
+    expense.destroy
+    render json: {"Message": "Expense was deleted"}
+  end
 
 end

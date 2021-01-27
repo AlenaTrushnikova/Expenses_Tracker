@@ -35,7 +35,46 @@
         </div>
     </div>
 
-    <div>Form to submit expense</div>
+    <div id = 'form-expense'>
+        <form id = "expense-form">
+            <h3>Add an expense</h3>
+    
+            <input
+              type="text"
+              name="description"
+              value=""
+              placeholder="Enter a description"
+              class="input-text"
+            />
+            <br />
+            <input
+              type="float"
+              name="amount"
+              value=""
+              placeholder="Enter an amount"
+              class="input-text"
+            />
+            <br />
+            <input
+            type="text"
+            name="date"
+            value=""
+            placeholder="Date: mm/dd/yyyy"
+            class="input-text"
+          />
+            <br />
+            <select class="form-select" aria-label="Category">
+                <option selected>Select a category</option>
+
+              </select>
+            <input
+              type="submit"
+              name="submit"
+              value="Add Expense"
+              class="submit"
+            />
+          </form>
+    </div>
 
     <div id="grouped-expenses">
         <h2>Expenses by category</h2>

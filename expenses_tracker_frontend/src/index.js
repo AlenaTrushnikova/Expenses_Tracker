@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
     buildGroupedExpenses(User)
     getUserExpenses(User)
+    addCategoriesToForm()
+    // addEventListenerToExpenseForm(User)
 })
+
 
 const BASE_URL = "http://localhost:3000"
 const USERS_URL = `${BASE_URL}/users`
+const CATEGORIES_URL = `${BASE_URL}/categories`
 const GROUPED_EXPENSES_URL = `${USERS_URL}/expenses_by_categories`
 const User = {};
 User['id'] = 5;
@@ -54,7 +58,6 @@ function getUserExpenses(user) {
 }
 
 function addExpenseToTable(expense) {
-    console.log('here', expense)
     let tableBody = document.getElementById('expenses-table-body')
     let tr = document.createElement('tr')
 
@@ -72,6 +75,8 @@ function addExpenseToTable(expense) {
     editBtn.textContent = 'Edit'
     deleteBtn.textContent = 'Delete'
 
+    deleteBtn.addEventListener('click', () => deleteExpense(expense.id))
+
     description.textContent = expense.description
     amount.textContent = `$${expense.amount}`
     date.textContent = expense.date
@@ -81,3 +86,70 @@ function addExpenseToTable(expense) {
     tableBody.appendChild(tr)
 }
 
+function deleteExpense(id){
+    fetch(`http://localhost:3000/expenses/${id}`,{
+    method:'DELETE'
+  })
+  .then(res => res.json())
+  .then(() => {
+    let expense = document.getElementById(`expense-${id}`)
+    expense.remove()
+  })
+}
+
+// function addCategoriesToForm(){
+    
+//     fetch(CATEGORIES_URL)
+//     .then(res => res.json())
+//     .then(categories => {
+//         categories.forEach(cat => addCategory(cat))
+//     })
+
+// }
+
+// function addCategory(category){
+    
+//     let select = document.querySelector('.form-select')
+//     let option = document.createElement('option')
+
+//     option.value = category.id
+//     option.textContent = category.name
+
+//     select.appendChild(option)
+
+// }
+
+function addEventListenerToExpenseForm(user){
+    let form = document.getElementById("expense-form")
+    form.id = user.id
+    form.addEventListener('submit', handleExpenseSubmit)
+}
+
+function handleExpenseSubmit(e){
+    e.preventDefault()
+    debugger
+    let id = parseInt(e.target.id)
+
+    let newExpense = {
+        categoryId: parseInt(e.target.children[7].value),
+        userId: id,
+        description: e.target.description.value,
+        amount: e.target.amount.value,
+        date: e.target.date.value
+    }
+
+    addNewExpense(newExpense)
+}
+
+function addNewExpense(expense){
+    fetch(`http://localhost:3000/expenses`,{
+    method:'POST',
+    headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(expense)
+  })
+  .then(res => res.json())
+  .then(expense => addExpenseToTable(expense))
+}
