@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 const BASE_URL = "http://localhost:3000"
 const USERS_URL = `${BASE_URL}/users`
 const GROUPED_EXPENSES_URL = `${USERS_URL}/expenses_by_categories`
+const CATEGORIES_URL = `${BASE_URL}/categories`
 var User = {};
 // User['id'] = 5;
 // User['name'] = 'Alena';
@@ -66,6 +67,8 @@ function addExpenseToTable(expense) {
     let editBtn = document.createElement('button')
     let deleteBtn = document.createElement('button')
 
+    deleteBtn.addEventListener('click', () => deleteExpense(expense.id))
+
     tr.id = `expense-${expense.id}`
     editBtn.id = `edit-exp-${expense.id}`
     editBtn.className = "btn btn-outline-success btn-sm"
@@ -83,6 +86,52 @@ function addExpenseToTable(expense) {
     tdDeleteBtn.append(deleteBtn)
     tr.append(description, amount, date, category, tdEditBtn, tdDeleteBtn)
     tableBody.appendChild(tr)
+}
+
+function deleteExpense(id){
+    fetch(`http://localhost:3000/expenses/${id}`,{
+        method:'DELETE'
+    })
+        .then(res => res.json())
+        .then(() => {
+            let expense = document.getElementById(`expense-${id}`)
+            expense.remove()
+        })
+}
+
+function addEventListenerToExpenseForm(user){
+    let form = document.getElementById("expense-form")
+    form.id = user.id
+    form.addEventListener('submit', handleExpenseSubmit)
+}
+
+function handleExpenseSubmit(e){
+    e.preventDefault()
+    debugger
+    let id = parseInt(e.target.id)
+
+    let newExpense = {
+        categoryId: parseInt(e.target.children[7].value),
+        userId: id,
+        description: e.target.description.value,
+        amount: e.target.amount.value,
+        date: e.target.date.value
+    }
+
+    addNewExpense(newExpense)
+}
+
+function addNewExpense(expense){
+    fetch(`http://localhost:3000/expenses`,{
+        method:'POST',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify(expense)
+    })
+        .then(res => res.json())
+        .then(expense => addExpenseToTable(expense))
 }
 
 // Display Budget
@@ -155,7 +204,7 @@ function handleLogin() {
             'Content-Type':'application/json',
         },
         body: JSON.stringify({'name': userName})
-        })
+    })
         .then(resp => resp.json())
         .then(user => setupUI(user))
 }
@@ -177,4 +226,5 @@ function setupUI(user) {
     getUserExpenses(User)
     displayBudget(User)
     editBudget()
+    addCategoriesToForm()
 }
