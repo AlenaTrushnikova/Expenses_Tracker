@@ -195,7 +195,8 @@ function userLogin() {
     userLoginBtn.addEventListener('click', handleLogin)
 }
 
-function handleLogin() {
+function handleLogin(e) {
+    e.preventDefault()
     let userName = document.querySelector('#user-name').value
     if (userName == "") {
         return
