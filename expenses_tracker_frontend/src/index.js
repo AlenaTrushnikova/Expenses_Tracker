@@ -153,12 +153,18 @@ function addNewExpense(expense){
         body: JSON.stringify(expense)
     })
         .then(res => res.json())
-        .then(expense => addExpenseToTable(expense))
+        .then(expense => {
+            addExpenseToTable(expense)
+            buildGroupedExpenses(User)
+        })
 }
 
 // Display Budget
 function displayBudget(user) {
     let budgetAmount = document.querySelector('#budget-amount')
+    if (user.budget === null){
+        user.budget = 0
+    }
     budgetAmount.textContent = 'Budget: ' + convertMoney(user.budget)
     let budgetEditBtn = document.querySelector('#budget-edit')
     budgetEditBtn.addEventListener('click', handleEdit)
@@ -209,6 +215,7 @@ function convertMoney(money) {
     return `$ ${money.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
 }
 
+//User LogIn
 function userLogin() {
     let userLoginBtn = document.querySelector('#user-login')
     userLoginBtn.addEventListener('click', handleLogin)
@@ -248,4 +255,16 @@ function setupUI(user) {
     editBudget()
     addEventListenerToExpenseForm(User)
     addCategoriesToForm()
+    // userLogout()
+}
+
+//User LogOut
+function userLogout() {
+    let userLogoutBtn = document.querySelector('#user-logout')
+    userLogoutBtn.addEventListener('click', handleLogout)
+}
+
+function handleLogout(e) {
+    e.preventDefault()
+
 }
