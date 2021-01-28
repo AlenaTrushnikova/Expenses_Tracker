@@ -79,47 +79,25 @@
     </div>
 
     <!--    Add an expense Form-->
-    <div id='form-expense'>
-        <form id="expense-form">
+    <div class="container" id='form-expense' style="width:70%">
             <h3>Add an expense</h3>
 
-            <input
-                    type="text"
-                    name="description"
-                    value=""
-                    placeholder="Enter a description"
-                    class="input-text"
-            />
-            <br/>
-            <input
-                    type="float"
-                    name="amount"
-                    value=""
-                    placeholder="Enter an amount"
-                    class="input-text"
-            />
-            <br/>
-            <input
-                    type="text"
-                    name="date"
-                    value=""
-                    placeholder="Date: mm/dd/yyyy"
-                    class="input-text"
-            />
-            <br/>
-            <select class="form-select" aria-label="Category">
-                <option selected>Select a category</option>
-
-            </select>
-            <input
-                    type="submit"
-                    name="submit"
-                    value="Add Expense"
-                    class="submit"
-            />
-        </form>
+            <div class="input-group" id="expense-form" >
+                <select class="form-select">
+                    <option selected>Select a category</option>
+                </select>
+                &nbsp; &nbsp;
+                <input type="text" name="description" value="" placeholder="Enter a description" class="input-text">
+                &nbsp; &nbsp;
+                <span class="input-group-text">$</span>
+                <input type="float" name="amount" value="" placeholder="10.00" class="input-text">
+                &nbsp; &nbsp;
+                <input type="date" data-date-inline-picker="true" />
+                &nbsp; &nbsp;
+                <input type="submit" name="submit" value="Add Expense" class="submit">
+            </div>
     </div>
-    <br>
+    <br><br><br>
 
     <!--    Expenses by category-->
     <div class="container" id="grouped-expenses">
