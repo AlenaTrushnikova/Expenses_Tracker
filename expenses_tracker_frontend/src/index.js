@@ -18,7 +18,10 @@ var User = {}
 function buildGroupedExpenses(user) {
     fetch(GROUPED_EXPENSES_URL + `/${user.id}`)
         .then(resp => resp.json())
-        .then(groupedCategories => categoriesTable(groupedCategories))
+        .then(groupedCategories => {
+            categoriesTable(groupedCategories)
+            drawChart(groupedCategories.categories)
+        })
 }
 
 function categoriesTable(groupedCategories) {
@@ -67,8 +70,11 @@ function addExpenseToTable(expense) {
     let tdDeleteBtn = document.createElement('td')
     let editBtn = document.createElement('button')
     let deleteBtn = document.createElement('button')
+    
+    builEditExpenseForm(expense)
 
     deleteBtn.addEventListener('click', () => deleteExpense(expense.id))
+    editBtn.addEventListener('click', () => displayEditExpense(expense))
 
     tr.id = `expense-${expense.id}`
     editBtn.id = `edit-exp-${expense.id}`
@@ -87,6 +93,27 @@ function addExpenseToTable(expense) {
     tdDeleteBtn.append(deleteBtn)
     tr.append(description, amount, date, category, tdEditBtn, tdDeleteBtn)
     tableBody.appendChild(tr)
+}
+
+//Edit Expense and Update TWO tables (expenses by categories and detailed Info)
+function builEditExpenseForm(expense){
+    // Edit Expense Form
+    let formRow = document.createElement('tr')
+    let expEditForm = document.createElement('form')
+    let descInput = document.createElement('input')
+    let amountInput = document.createElement('input')
+    let dateInput = document.createElement('input')
+    let catSelect = document.createElement('select')
+    let option = document.createElement('option')
+
+
+    expEditForm.id = `exp-edit-form-${expense.id}`
+    expEditForm.className = 'exp-edit hidden'
+    //expEditForm.
+}
+
+function displayEditExpense(){
+    console.log('In progress')
 }
 
 //Delete Expenses and Update TWO tables (expenses by categories and detailed Info)
@@ -141,6 +168,11 @@ function handleExpenseSubmit(e){
     }
 
     addNewExpense(newExpense)
+
+    e.target.description.value = ''
+    e.target.amount.value = ''
+    e.target.date.value = ''
+    e.target.children[7].value = 'Select a category'
 }
 
 function addNewExpense(expense){
@@ -153,12 +185,18 @@ function addNewExpense(expense){
         body: JSON.stringify(expense)
     })
         .then(res => res.json())
-        .then(expense => addExpenseToTable(expense))
+        .then(expense => {
+            addExpenseToTable(expense)
+            buildGroupedExpenses(User)
+        })
 }
 
 // Display Budget
 function displayBudget(user) {
     let budgetAmount = document.querySelector('#budget-amount')
+    if (user.budget === null){
+        user.budget = 0
+    }
     budgetAmount.textContent = 'Budget: ' + convertMoney(user.budget)
     let budgetEditBtn = document.querySelector('#budget-edit')
     budgetEditBtn.addEventListener('click', handleEdit)
@@ -209,6 +247,7 @@ function convertMoney(money) {
     return `$ ${money.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
 }
 
+//User LogIn
 function userLogin() {
     let userLoginBtn = document.querySelector('#user-login')
     userLoginBtn.addEventListener('click', handleLogin)
@@ -242,10 +281,88 @@ function setupUI(user) {
     let loginForm = document.querySelector('#login-form')
     loginForm.className = "hidden"
 
+    let welcomeSpan = document.querySelector('#welcome-user')
+    welcomeSpan.textContent = "Hi, " + `${user.name}`
+
     buildGroupedExpenses(User)
     getUserExpenses(User)
     displayBudget(User)
     editBudget()
     addEventListenerToExpenseForm(User)
     addCategoriesToForm()
+    userLogout()
+    deleteAccount()
+}
+
+//User LogOut
+function userLogout() {
+    let userLogoutBtn = document.querySelector('#user-logout')
+    userLogoutBtn.addEventListener('click', handleLogout)
+}
+
+function handleLogout(e) {
+    e.preventDefault()
+    window.localStorage.clear();
+    window.location.reload()
+}
+
+//Delete Account
+function deleteAccount(user) {
+    let userDeleteBtn = document.querySelector('#user-delete')
+    userDeleteBtn.addEventListener('click', handleDeleteAccount)
+}
+
+function handleDeleteAccount(e) {
+    e.preventDefault()
+    fetch(USERS_URL + `/${User.id}`,{
+        method:'DELETE'
+    })
+        .then(res => res.json())
+        .then(() => {
+            window.localStorage.clear();
+            window.location.reload()
+        })
+}
+
+//Pie chart
+function drawChart(categories) {
+    let categoriesLabels = []
+    let categoriesValues = []
+    categories.forEach(category => {
+        categoriesLabels.push(category.categoryName)
+        categoriesValues.push(parseInt(category.amount.toString()))
+    })
+
+    let ctx = document.getElementById('myChart').getContext('2d');
+    let myDoughnutChart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
+
+        // The data for our dataset
+        data: {
+            labels: categoriesLabels,
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                data: categoriesValues
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    fontColor: 'white'
+                }
+            }
+        }
+    });
 }
