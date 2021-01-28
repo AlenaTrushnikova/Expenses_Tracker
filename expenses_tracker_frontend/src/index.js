@@ -18,7 +18,10 @@ var User = {}
 function buildGroupedExpenses(user) {
     fetch(GROUPED_EXPENSES_URL + `/${user.id}`)
         .then(resp => resp.json())
-        .then(groupedCategories => categoriesTable(groupedCategories))
+        .then(groupedCategories => {
+            categoriesTable(groupedCategories)
+            drawChart(groupedCategories.categories)
+        })
 }
 
 function categoriesTable(groupedCategories) {
@@ -290,4 +293,51 @@ function handleDeleteAccount(e) {
             window.localStorage.clear();
             window.location.reload()
         })
+}
+
+//Pie chart
+function drawChart(categories) {
+    console.log(categories)
+    let categoriesLabels = []
+    let categoriesValues = []
+    categories.forEach(category => {
+        categoriesLabels.push(category.categoryName)
+        categoriesValues.push(parseInt(category.amount.toString()))
+    })
+    console.log('Hi')
+    console.log(categoriesLabels)
+    console.log(categoriesValues)
+
+    let ctx = document.getElementById('myChart').getContext('2d');
+    let myDoughnutChart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
+
+        // The data for our dataset
+        data: {
+            labels: categoriesLabels,
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                data: categoriesValues
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    fontColor: 'white'
+                }
+            }
+        }
+    });
 }
