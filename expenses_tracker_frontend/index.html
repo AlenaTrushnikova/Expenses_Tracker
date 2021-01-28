@@ -62,7 +62,7 @@
         <button class="btn btn-outline-light btn-sm" type="button" id="budget-edit">Edit</button>
     </div>
     <br>
-<!--    Budget form-->
+    <!--    Budget form-->
     <div class="budget hidden" style="justify-content: flex-end">
         <div class="input-group mb-3" id="budget" style="width:40%">
             <div class="input-group-prepend">
@@ -78,66 +78,73 @@
         </div>
     </div>
 
-<!--    Add an expense Form-->
-    <div id = 'form-expense'>
-        <form id = "expense-form">
+    <!--    Add an expense Form-->
+    <div id='form-expense'>
+        <form id="expense-form">
             <h3>Add an expense</h3>
-    
+
             <input
-              type="text"
-              name="description"
-              value=""
-              placeholder="Enter a description"
-              class="input-text"
+                    type="text"
+                    name="description"
+                    value=""
+                    placeholder="Enter a description"
+                    class="input-text"
             />
-            <br />
+            <br/>
             <input
-              type="float"
-              name="amount"
-              value=""
-              placeholder="Enter an amount"
-              class="input-text"
+                    type="float"
+                    name="amount"
+                    value=""
+                    placeholder="Enter an amount"
+                    class="input-text"
             />
-            <br />
+            <br/>
             <input
-            type="text"
-            name="date"
-            value=""
-            placeholder="Date: mm/dd/yyyy"
-            class="input-text"
-          />
-            <br />
+                    type="text"
+                    name="date"
+                    value=""
+                    placeholder="Date: mm/dd/yyyy"
+                    class="input-text"
+            />
+            <br/>
             <select class="form-select" aria-label="Category">
                 <option selected>Select a category</option>
 
-              </select>
+            </select>
             <input
-              type="submit"
-              name="submit"
-              value="Add Expense"
-              class="submit"
+                    type="submit"
+                    name="submit"
+                    value="Add Expense"
+                    class="submit"
             />
-          </form>
+        </form>
     </div>
     <br>
 
-<!--    Expenses by category-->
-    <div id="grouped-expenses">
-        <h2>Expenses by category</h2>
-        <table class="table table-dark table-striped table-borderless" style="width:50%">
-            <thead>
-            <tr>
-                <th style="width:60%" scope="col">Category</th>
-                <th style="width:40%" scope="col">Total Amount</th>
-            </tr>
-            </thead>
-            <tbody id="grouped-expenses-body">
-            </tbody>
-        </table>
+    <!--    Expenses by category-->
+    <div class="container" id="grouped-expenses">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <h2>Expenses by category</h2>
+                <table class="table table-dark table-striped table-borderless">
+                    <thead>
+                    <tr>
+                        <th style="width:60%" scope="col">Category</th>
+                        <th style="width:40%" scope="col">Total Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody id="grouped-expenses-body">
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                Hi
+            </div>
+        </div>
     </div>
     <br>
 
-<!--    Detailed Expenses Info-->
+    <!--    Detailed Expenses Info-->
     <div id='user-expenses'>
         <h2>Detailed Expenses Info</h2>
         <table class="table table-dark table-sm">
