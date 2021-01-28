@@ -162,10 +162,7 @@ function addEventListenerToExpenseForm(user){
         addNewExpense(newExpense)
 
         //Update the form
-        select.options[select.selectedIndex].value = ''
-        e.target.description.value = ''
-        e.target.amount.value = ''
-        e.target.date.value = 'Select a category'
+        form.reset()
     })
 }
 
