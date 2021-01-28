@@ -297,16 +297,12 @@ function handleDeleteAccount(e) {
 
 //Pie chart
 function drawChart(categories) {
-    console.log(categories)
     let categoriesLabels = []
     let categoriesValues = []
     categories.forEach(category => {
         categoriesLabels.push(category.categoryName)
         categoriesValues.push(parseInt(category.amount.toString()))
     })
-    console.log('Hi')
-    console.log(categoriesLabels)
-    console.log(categoriesValues)
 
     let ctx = document.getElementById('myChart').getContext('2d');
     let myDoughnutChart = new Chart(ctx, {
