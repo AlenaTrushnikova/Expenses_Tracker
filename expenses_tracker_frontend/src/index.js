@@ -258,7 +258,8 @@ function setupUI(user) {
     editBudget()
     addEventListenerToExpenseForm(User)
     addCategoriesToForm()
-    // userLogout()
+    userLogout()
+    deleteAccount()
 }
 
 //User LogOut
@@ -269,6 +270,24 @@ function userLogout() {
 
 function handleLogout(e) {
     e.preventDefault()
-
+    window.localStorage.clear();
+    window.location.reload()
 }
 
+//Delete Account
+function deleteAccount(user) {
+    let userDeleteBtn = document.querySelector('#user-delete')
+    userDeleteBtn.addEventListener('click', handleDeleteAccount)
+}
+
+function handleDeleteAccount(e) {
+    e.preventDefault()
+    fetch(USERS_URL + `/${User.id}`,{
+        method:'DELETE'
+    })
+        .then(res => res.json())
+        .then(() => {
+            window.localStorage.clear();
+            window.location.reload()
+        })
+}
