@@ -79,23 +79,25 @@
     </div>
 
     <!--    Add an expense Form-->
-    <div class="container" id='form-expense' style="width:70%">
-            <h3>Add an expense</h3>
+    <div class="container px-5" id='form-expense'>
+            <div class="d-flex justify-content-center" style="width: -moz-fit-content">
+                <h3>Add an expense</h3>
+            </div>
 
-            <div class="input-group" id="expense-form" >
-                <select class="form-select">
+            <form id="expense-form" class="input-group d-flex justify-content-center">
+                <select class="form-select" >
                     <option selected>Select a category</option>
                 </select>
-                &nbsp; &nbsp;
+                &nbsp;
                 <input type="text" name="description" value="" placeholder="Enter a description" class="input-text">
-                &nbsp; &nbsp;
+                &nbsp;
                 <span class="input-group-text">$</span>
                 <input type="float" name="amount" value="" placeholder="10.00" class="input-text">
+                &nbsp;
+                <input type="date" name="date" data-date-inline-picker="true" />
                 &nbsp; &nbsp;
-                <input type="date" data-date-inline-picker="true" />
-                &nbsp; &nbsp;
-                <input type="submit" name="submit" value="Add Expense" class="submit">
-            </div>
+                <input type="submit" name="submit" value="Add Expense" class="submit btn btn-success">
+            </form>
     </div>
     <br><br><br>
 

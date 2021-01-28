@@ -129,51 +129,46 @@ function deleteExpense(expenseId){
         })
 }
 
-//Add new expense Form
+// Add new expense Form
 
-
-function addEventListenerToExpenseForm(user){
-    let form = document.getElementById("expense-form")
-    form.id = user.id
-    form.addEventListener('submit', handleExpenseSubmit)
-}
-function addCategoriesToForm(){
+//Categories Options
+function addCategoriesToForm() {
     fetch(CATEGORIES_URL)
         .then(res => res.json())
         .then(categories => {
-            categories.forEach(cat => addCategory(cat))
+            categories.forEach(category => {
+                let select = document.querySelector('.form-select')
+                let option = document.createElement('option')
+                option.value = category.id
+                option.textContent = category.name
+                select.appendChild(option)
+            })
         })
 }
 
-function addCategory(category){
-    let select = document.querySelector('.form-select')
-    let option = document.createElement('option')
+function addEventListenerToExpenseForm(user){
+    let form = document.querySelector("#expense-form")
+    form.addEventListener('submit', function (e) {
+        e.preventDefault()
+        let select = document.querySelector('.form-select')
 
-    option.value = category.id
-    option.textContent = category.name
+        let newExpense = {
+                categoryId: select.options[select.selectedIndex].value,
+                userId: User.id,
+                description: e.target.description.value,
+                amount: e.target.amount.value,
+                date: e.target.date.value
+            }
+        addNewExpense(newExpense)
 
-    select.appendChild(option)
+        //Update the form
+        select.options[select.selectedIndex].value = ''
+        e.target.description.value = ''
+        e.target.amount.value = ''
+        e.target.date.value = 'Select a category'
+    })
 }
 
-function handleExpenseSubmit(e){
-    e.preventDefault()
-    let id = parseInt(e.target.id)
-
-    let newExpense = {
-        categoryId: parseInt(e.target.children[7].value),
-        userId: id,
-        description: e.target.description.value,
-        amount: parseFloat(e.target.amount.value),
-        date: e.target.date.value
-    }
-
-    addNewExpense(newExpense)
-
-    e.target.description.value = ''
-    e.target.amount.value = ''
-    e.target.date.value = ''
-    e.target.children[7].value = 'Select a category'
-}
 
 function addNewExpense(expense){
     fetch(`http://localhost:3000/expenses`,{
