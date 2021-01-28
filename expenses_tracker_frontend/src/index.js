@@ -67,8 +67,11 @@ function addExpenseToTable(expense) {
     let tdDeleteBtn = document.createElement('td')
     let editBtn = document.createElement('button')
     let deleteBtn = document.createElement('button')
+    
+    builEditExpenseForm(expense)
 
     deleteBtn.addEventListener('click', () => deleteExpense(expense.id))
+    editBtn.addEventListener('click', () => displayEditExpense(expense))
 
     tr.id = `expense-${expense.id}`
     editBtn.id = `edit-exp-${expense.id}`
@@ -87,6 +90,27 @@ function addExpenseToTable(expense) {
     tdDeleteBtn.append(deleteBtn)
     tr.append(description, amount, date, category, tdEditBtn, tdDeleteBtn)
     tableBody.appendChild(tr)
+}
+
+//Edit Expense and Update TWO tables (expenses by categories and detailed Info)
+function builEditExpenseForm(expense){
+    // Edit Expense Form
+    let formRow = document.createElement('tr')
+    let expEditForm = document.createElement('form')
+    let descInput = document.createElement('input')
+    let amountInput = document.createElement('input')
+    let dateInput = document.createElement('input')
+    let catSelect = document.createElement('select')
+    let option = document.createElement('option')
+
+
+    expEditForm.id = `exp-edit-form-${expense.id}`
+    expEditForm.className = 'exp-edit hidden'
+    //expEditForm.
+}
+
+function displayEditExpense(){
+    console.log('In progress')
 }
 
 //Delete Expenses and Update TWO tables (expenses by categories and detailed Info)
