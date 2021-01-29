@@ -75,7 +75,7 @@ function addExpenseToTable(expense) {
     deleteBtn.addEventListener('click', () => deleteExpense(expense.id))
     editBtn.addEventListener('click', () => displayEditExpense(expense))
 
-    tdEditForm.id = `exp-edit-${expense.id}`
+    tdEditForm.id = `${expense.id}-exp-edit`
     tdEditForm.className = `hidden edit td`
     tr.id = `expense-${expense.id}`
     editBtn.id = `edit-exp-${expense.id}`
@@ -114,10 +114,15 @@ function addExpenseToTable(expense) {
     // //expEditForm.
 // }
 
+
+// Display edit expense form
 function displayEditExpense(expense){
-    debugger
     let editExpForm = document.getElementById('edit-expense')
-    let hiddenTd = document.getElementById(`exp-edit-${expense.id}`)
+    let hiddenTd = document.getElementById(`${expense.id}-exp-edit`)
+
+    //editExpForm.id = `${expense.id}`
+
+    editExpForm.addEventListener('submit', handleExpenseEdit)
 
     hiddenTd.append(editExpForm)
 
@@ -127,6 +132,45 @@ function displayEditExpense(expense){
         hiddenTd.className = 'hidden edit td'
     }
 }
+
+// Edit Expense
+
+function handleExpenseEdit(e){
+    e.preventDefault()
+    
+    expId = parseInt(e.target.parentElement.parentElement.id).toString()
+    editedExpense = {
+        description: e.target.description.value,
+        amount: e.target.amount.value,
+        date: e.target.date.value,
+        categoryId: e.target.children[6].value,
+        userId: expId
+      }
+
+    fetch(`http://localhost:3000/expenses/${expId}`,{
+        method:'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(editedExpense)})
+      .then(res => res.json())
+      .then(exp => {
+        let oldTr = document.getElementById(`expense-${expId}`)
+
+        oldTr.childen[0].innerHTML = exp.description
+        oldTr.childen[1].innerHTML = exp.amount
+        oldTr.childen[2].innerHTML = exp.date
+        oldTr.childen[3].innerHTML = exp.categoryId
+
+        debugger
+
+
+        buildGroupedExpenses(User)
+
+      })
+}
+
 
 //Delete Expenses and Update TWO tables (expenses by categories and detailed Info)
 function deleteExpense(expenseId){
@@ -165,6 +209,14 @@ function addCategory(category){
     option.textContent = category.name
 
     select.appendChild(option)
+
+    let selectEdit = document.querySelector('.form-select-edit')
+    let optionEdit = document.createElement('option')
+
+    optionEdit.value = category.id
+    optionEdit.textContent = category.name
+
+    selectEdit.appendChild(optionEdit)
 }
 
 function handleExpenseSubmit(e){
