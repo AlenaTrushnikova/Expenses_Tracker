@@ -10,7 +10,7 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script defer src='src/index.js'></script>
 </head>
-<body class="bg-dark text-light">
+<body class="bg-dark text-light" id="body">
 
 <header>
     <nav class="navbar navbar-light bg-dark">
@@ -100,6 +100,48 @@
             </form>
     </div>
     <br><br><br>
+    <!--Edit expense Form-->
+    <div class = 'edit expense hidden'>
+        <div id = 'edit-expense'>
+            <form id = "expense-form-edit">
+                <input
+                        type="text"
+                        name="description"
+                        value=""
+                        placeholder="Enter a description"
+                        class="input-text"
+                />
+                <br />
+                <input
+                        type="float"
+                        name="amount"
+                        value=""
+                        placeholder="Enter an amount"
+                        class="input-text"
+                />
+                <br />
+                <input
+                        type="text"
+                        name="date"
+                        value=""
+                        placeholder="Date: mm/dd/yyyy"
+                        class="input-text"
+                />
+                <br />
+                <select class="form-select-edit" aria-label="Category">
+                    <option selected>Select a category</option>
+
+                </select>
+                <input
+                        type="submit"
+                        name="submit"
+                        value="Edit Expense"
+                        class="submit"
+                />
+            </form>
+        </div>
+    </div>
+
 
     <!--    Expenses by category-->
     <div class="container" id="grouped-expenses">

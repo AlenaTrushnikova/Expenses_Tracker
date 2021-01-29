@@ -17,7 +17,9 @@ class ExpensesController < ApplicationController
 
   def update
     expense = Expense.find_by(id: params[:id])
+    p expense
     expense.update(amount: params[:amount], date: params[:date], description: params[:description], user_id: params[:userId], category_id: params[:categoryId])
+    p expense
     render json: expense
   end
 

@@ -61,6 +61,7 @@ function getUserExpenses(user) {
 function addExpenseToTable(expense) {
     let tableBody = document.getElementById('expenses-table-body')
     let tr = document.createElement('tr')
+    let tdEditForm = document.createElement('td')
 
     let description = document.createElement('td')
     let amount = document.createElement('td')
@@ -76,6 +77,8 @@ function addExpenseToTable(expense) {
     deleteBtn.addEventListener('click', () => deleteExpense(expense.id))
     editBtn.addEventListener('click', () => displayEditExpense(expense))
 
+    tdEditForm.id = `${expense.id}-exp-edit`
+    tdEditForm.className = `hidden edit td`
     tr.id = `expense-${expense.id}`
     editBtn.id = `edit-exp-${expense.id}`
     editBtn.className = "btn btn-outline-success btn-sm"
@@ -98,7 +101,7 @@ function addExpenseToTable(expense) {
     category.textContent = expense.category.name
     tdEditBtn.append(editBtn)
     tdDeleteBtn.append(deleteBtn)
-    tr.append(category, description, amount, date, tdEditBtn, tdDeleteBtn)
+    tr.append(category, description, amount, date, tdEditBtn, tdDeleteBtn, tdEditForm)
     tableBody.appendChild(tr)
 }
 
@@ -120,8 +123,63 @@ function builEditExpenseForm(expense){
 }
 
 
-function displayEditExpense(){
-    console.log('In progress')
+function displayEditExpense(expense) {
+    let hiddenTd = document.getElementById(`${expense.id}-exp-edit`)
+
+    if (hiddenTd.classList.contains("hidden")) {
+        let editExpForm = document.getElementById('edit-expense')
+
+        // editExpForm.id = `${expense.id}`
+        editExpForm.id = `exp-edit-form-${expense.id}`
+        editExpForm.addEventListener('submit', handleExpenseEdit)
+        editExpForm.className = 'exp-edit'
+        hiddenTd.append(editExpForm)
+        hiddenTd.className = 'edit td'
+    } else {
+        let editExpForm = document.getElementById(`exp-edit-form-${expense.id}`)
+        editExpForm.id = `edit-expense`
+        let body = document.querySelector('#body')
+        body.append(editExpForm)
+        hiddenTd.className = 'hidden edit td'
+
+        hiddenTd.innerHTML = ''
+    }
+
+}
+
+function handleExpenseEdit(e) {
+    e.preventDefault()
+
+    expId = parseInt(e.target.parentElement.parentElement.id).toString()
+    editedExpense = {
+        description: e.target.description.value,
+        amount: e.target.amount.value,
+        date: e.target.date.value,
+        categoryId: e.target.children[6].value,
+        userId: expId
+    }
+
+    fetch(`http://localhost:3000/expenses/${expId}`,{
+        method:'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify(editedExpense)})
+        .then(res => res.json())
+        .then(exp => {
+            let oldTr = document.getElementById(`expense-${expId}`)
+
+            oldTr.childen[0].innerHTML = exp.description
+            oldTr.childen[1].innerHTML = exp.amount
+            oldTr.childen[2].innerHTML = exp.date
+            oldTr.childen[3].innerHTML = exp.categoryId
+
+
+
+            buildGroupedExpenses(User)
+
+        })
 }
 
 //Delete Expenses and Update TWO tables (expenses by categories and detailed Info)
@@ -150,6 +208,14 @@ function addCategoriesToForm() {
                 option.value = category.id
                 option.textContent = category.name
                 select.appendChild(option)
+
+                let selectEdit = document.querySelector('.form-select-edit')
+                let optionEdit = document.createElement('option')
+
+                optionEdit.value = category.id
+                optionEdit.textContent = category.name
+
+                selectEdit.appendChild(optionEdit)
             })
         })
 }
@@ -206,7 +272,7 @@ function displayBudget(user) {
 }
 function handleEdit (){
     let budgetForm = document.querySelector('.budget')
-    if (budgetForm.classList.contains("hidden") == true) {
+    if (budgetForm.classList.contains("hidden")) {
         budgetForm.className = "budget flex"
     } else
         budgetForm.className = "budget hidden"
@@ -369,3 +435,4 @@ function drawChart(categories) {
         }
     });
 }
+
