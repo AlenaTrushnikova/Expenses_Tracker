@@ -98,7 +98,7 @@ function addExpenseToTable(expense) {
     category.textContent = expense.category.name
     tdEditBtn.append(editBtn)
     tdDeleteBtn.append(deleteBtn)
-    tr.append(description, amount, date, category, tdEditBtn, tdDeleteBtn)
+    tr.append(category, description, amount, date, tdEditBtn, tdDeleteBtn)
     tableBody.appendChild(tr)
 }
 
@@ -118,6 +118,7 @@ function builEditExpenseForm(expense){
     expEditForm.className = 'exp-edit hidden'
     //expEditForm.
 }
+
 
 function displayEditExpense(){
     console.log('In progress')
@@ -159,14 +160,8 @@ function addEventListenerToExpenseForm(user){
         e.preventDefault()
         let select = document.querySelector('.form-select')
 
-
-
-        // let todayDate = Date.now().toISOString().slice(0,10)
-        console.log(typeof e.target.date.value)
-
         let newAmount = (e.target.amount.value === '') ? 0.00 : e.target.amount.value
-        let newDate = (e.target.date.value === '') ? '2000-01-01' : e.target.date.value
-        console.log(newDate)
+        let newDate = (e.target.date.value === '') ? Date() : e.target.date.value
 
         let newExpense = {
                 categoryId: select.options[select.selectedIndex].value,
@@ -182,7 +177,6 @@ function addEventListenerToExpenseForm(user){
         form.reset()
     })
 }
-
 
 function addNewExpense(expense){
     fetch(`http://localhost:3000/expenses`,{

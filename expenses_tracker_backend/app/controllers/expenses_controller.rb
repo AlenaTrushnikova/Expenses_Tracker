@@ -10,16 +10,16 @@ class ExpensesController < ApplicationController
     render json: expense, include: :category
   end
 
-  #
-  # def edit
-  #   expense = Expense.find_by(id: params[:id])
-  # end
-  #
-  # def update
-  #   expense = Expense.find_by(id: params[:id])
-  #   expense.update(amount: params[:amount], date: params[:date], description: params[:description], user_id: params[:user_id], category_id: params[:category_id])
-  #   render json: expense
-  # end
+
+  def edit
+    expense = Expense.find_by(id: params[:id])
+  end
+
+  def update
+    expense = Expense.find_by(id: params[:id])
+    expense.update(amount: params[:amount], date: params[:date], description: params[:description], user_id: params[:userId], category_id: params[:categoryId])
+    render json: expense
+  end
 
   def create
     expense = Expense.create(amount: params[:amount], date: params[:date], description: params[:description], user_id: params[:userId], category_id: params[:categoryId])
