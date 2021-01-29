@@ -131,13 +131,15 @@ function handleExpenseEdit(e) {
     e.preventDefault()
     console.log()
     let select = document.querySelector('.form-select-edit')
+    let editedAmount = (e.target.amount.value === '') ? 0.00 : e.target.amount.value
+    let editedDate = (e.target.date.value === '') ? Date() : e.target.date.value
 
 
     expId = parseInt(e.target.parentElement.parentElement.id).toString()
     editedExpense = {
         description: e.target.description.value,
-        amount: e.target.amount.value,
-        date: e.target.date.value,
+        amount: editedAmount,
+        date: editedDate,
         categoryId: select.options[select.selectedIndex].value,
         userId: User.id
     }
@@ -399,12 +401,23 @@ function drawChart(categories) {
             datasets: [{
                 label: 'My First dataset',
                 backgroundColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(255, 99, 132, 1)', //1
+                    'rgba(54, 162, 235, 1)', //2
+                    'rgba(255, 206, 86, 1)', //3
+                    'rgba(75, 192, 192, 1)', //4
+                    'rgba(153, 102, 255, 1)', //5
+                    'rgba(255, 159, 64, 1)', //6
+                    'rgba(137, 24, 48, 1)', //7
+                    'rgba(89, 184, 90, 1)', //8
+                    'rgba(242, 186, 198, 1)', //9
+                    'rgba(178, 209, 229, 1)', //10
+                    'rgba(240, 225, 188, 1)', //11
+                    'rgba(209, 192, 244, 1)', //12
+                    'rgba(255, 223, 192, 1)', //13
+                    'rgba(249, 36, 36, 1)', //14
+                    'rgba(36, 72, 249, 1)', //15
+                    'rgba(246, 102, 255, 1)', //16
+                    'rgba(137, 137, 137, 1)', //17
                 ],
                 data: categoriesValues
             }]
