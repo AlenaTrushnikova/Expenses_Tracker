@@ -85,9 +85,16 @@ function addExpenseToTable(expense) {
     editBtn.textContent = 'Edit'
     deleteBtn.textContent = 'Delete'
 
+    //Changing Date display
+    const d = new Date(expense.date);
+    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
+    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+
+
     description.textContent = expense.description
     amount.textContent = convertMoney(expense.amount)
-    date.textContent = expense.date
+    date.textContent = `${da} ${mo}, ${ye}`
     category.textContent = expense.category.name
     tdEditBtn.append(editBtn)
     tdDeleteBtn.append(deleteBtn)
@@ -152,13 +159,23 @@ function addEventListenerToExpenseForm(user){
         e.preventDefault()
         let select = document.querySelector('.form-select')
 
+
+
+        // let todayDate = Date.now().toISOString().slice(0,10)
+        console.log(typeof e.target.date.value)
+
+        let newAmount = (e.target.amount.value === '') ? 0.00 : e.target.amount.value
+        let newDate = (e.target.date.value === '') ? '2000-01-01' : e.target.date.value
+        console.log(newDate)
+
         let newExpense = {
                 categoryId: select.options[select.selectedIndex].value,
                 userId: User.id,
                 description: e.target.description.value,
-                amount: e.target.amount.value,
-                date: e.target.date.value
+                amount: newAmount,
+                date: newDate
             }
+
         addNewExpense(newExpense)
 
         //Update the form
