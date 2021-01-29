@@ -10,11 +10,9 @@ Expense.destroy_all
 User.destroy_all
 Category.destroy_all
 
-u1 = User.create(name: "Alena", budget: 8000.00)
+u1 = User.create(name: "Alena", budget: 10000.00)
 u2 = User.create(name: "Juan", budget: 10000.00)
 u3 = User.create(name: "test", budget: 1000000.00)
-
-
 
 c1 = Category.create(name: "Housing")
 c2 = Category.create(name: "Bills & Utilities")
@@ -58,12 +56,29 @@ e120 = Expense.create(amount: 1800.00, date: "2021-01-28", description: "Vacatio
 e121 = Expense.create(amount: 7.65, date: "2021-01-28", description: "Coffee", category_id: c5.id, user_id: u1.id)
 e122 = Expense.create(amount: 3500.80, date: "2021-01-31", description: "Rent", category_id: c1.id, user_id: u1.id)
 
-e21 = Expense.create(amount: 2500.00, date: "2021-01-31", description: "Rent", category_id: c5.id, user_id: u2.id)
-e22 = Expense.create(amount: 200.00, date: "2021-01-15", description: "Utilities", category_id: c3.id, user_id: u2.id)
-e23 = Expense.create(amount: 135.00, date: "2021-01-01", description: "Flight to SEA", category_id: c1.id, user_id: u2.id)
-e24 = Expense.create(amount: 2500.00, date: "2020-12-31", description: "Rent", category_id: c5.id, user_id: u2.id)
-e25 = Expense.create(amount: 200.00, date: "2020-12-15", description: "Utilities", category_id: c3.id, user_id: u2.id)
-e26 = Expense.create(amount: 150.00, date: "2021-01-01", description: "Costco", category_id: c2.id, user_id: u2.id)
+
+e21 = Expense.create(amount: 800.00, date: "2021-01-02", description: "Rent", category_id: c1.id, user_id: u2.id)
+e22 = Expense.create(amount: 40.00, date: "2021-01-02", description: "Utilities", category_id: c2.id, user_id: u2.id)
+e23 = Expense.create(amount: 60.00, date: "2021-01-02", description: "Internet", category_id: c2.id, user_id: u2.id)
+e24 = Expense.create(amount: 140.00, date: "2021-01-02", description: "Costco", category_id: c5.id, user_id: u2.id)
+e25 = Expense.create(amount: 10.00, date: "2021-01-02", description: "Spotify", category_id: c6.id, user_id: u2.id)
+e26 = Expense.create(amount: 135.00, date: "2021-01-03", description: "Flight from SD", category_id: c11.id, user_id: u2.id)
+e27 = Expense.create(amount: 49.00, date: "2021-01-03", description: "Parking Ticket", category_id: c5.id, user_id: u2.id)
+e28 = Expense.create(amount: 210.00, date: "2021-01-10", description: "Costco", category_id: c5.id, user_id: u2.id)
+e29 = Expense.create(amount: 120.00, date: "2021-01-15", description: "Phone plan", category_id: c2.id, user_id: u2.id)
+e210 = Expense.create(amount: 60.00, date: "2020-12-15", description: "Oil Change", category_id: c3.id, user_id: u2.id)
+e211 = Expense.create(amount: 40.00, date: "2021-01-15", description: "Chiropractor", category_id: c7.id, user_id: u2.id)
+e212 = Expense.create(amount: 180.00, date: "2021-01-19", description: "Costco", category_id: c5.id, user_id: u2.id)
+e213 = Expense.create(amount: 5.00, date: "2021-20-31", description: "Coffee", category_id: c5.id, user_id: u2.id)
+e214 = Expense.create(amount: 49.00, date: "2021-01-21", description: "Parking Ticket", category_id: c5.id, user_id: u2.id)
+e215 = Expense.create(amount: 10.00, date: "2021-01-22", description: "Lightroom", category_id: c15.id, user_id: u2.id)
+e216 = Expense.create(amount: 40.00, date: "2021-01-25", description: "Nature Conservancy", category_id: c13.id, user_id: u2.id)
+e217 = Expense.create(amount: 170.00, date: "2021-01-26", description: "Costco", category_id: c5.id, user_id: u2.id)
+e218 = Expense.create(amount: 80.00, date: "2021-01-27", description: "Car Insurance", category_id: c3.id, user_id: u2.id)
+e219 = Expense.create(amount: 50.00, date: "2021-01-27", description: "Gas", category_id: c3.id, user_id: u2.id)
+e220 = Expense.create(amount: 30.00, date: "2021-01-28", description: "Bridge Tolls", category_id: c3.id, user_id: u2.id)
+
+
 
 e31 = Expense.create(amount: 11000.00, date: "2021-01-02", description: "Flatiron Course", category_id: c12.id, user_id: u3.id)
 e32 = Expense.create(amount: 5999.99, date: "2021-01-10", description: "Family Vacation", category_id: c11.id, user_id: u3.id)
