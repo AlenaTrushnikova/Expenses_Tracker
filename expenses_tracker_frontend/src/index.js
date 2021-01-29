@@ -138,11 +138,8 @@ function displayEditExpense(expense) {
         hiddenTd.append(editExpForm)
         hiddenTd.className = 'edit td'
     } else {
-        let editExpForm = document.getElementById(`exp-edit-form-${expense.id}`)
-        editExpForm.id = `edit-expense`
-        editExpForm.className = 'hidden'
-        let body = document.querySelector('#body')
-        body.append(editExpForm)
+        restoreExpenseEditForm(expense.id)
+
         hiddenTd.className = 'hidden edit td'
 
         hiddenTd.innerHTML = ''
@@ -174,9 +171,21 @@ function handleExpenseEdit(e) {
         body: JSON.stringify(editedExpense)})
         .then(res => res.json())
         .then(exp => {
+            restoreExpenseEditForm(expId)
+
             getUserExpenses(User)
             buildGroupedExpenses(User)
         })
+}
+
+function restoreExpenseEditForm(expenseId) {
+    let editExpForm = document.getElementById(`exp-edit-form-${expenseId}`)
+    editExpForm.id = `edit-expense`
+    editExpForm.className = 'hidden'
+    let expFormEditReset = document.querySelector('#expense-form-edit')
+    expFormEditReset.reset()
+    let body = document.querySelector('#body')
+    body.append(editExpForm)
 }
 
 //Delete Expenses and Update TWO tables (expenses by categories and detailed Info)
