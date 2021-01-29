@@ -54,6 +54,8 @@ function getUserExpenses(user) {
     fetch(`${USERS_URL}/${user.id}`)
         .then(res => res.json())
         .then(user => {
+            let tableBody = document.getElementById('expenses-table-body')
+            tableBody.innerHTML = ''
             user.expenses.forEach(expense => addExpenseToTable(expense))
         })
 }
@@ -138,6 +140,7 @@ function displayEditExpense(expense) {
     } else {
         let editExpForm = document.getElementById(`exp-edit-form-${expense.id}`)
         editExpForm.id = `edit-expense`
+        editExpForm.className = 'hidden'
         let body = document.querySelector('#body')
         body.append(editExpForm)
         hiddenTd.className = 'hidden edit td'
@@ -149,14 +152,17 @@ function displayEditExpense(expense) {
 
 function handleExpenseEdit(e) {
     e.preventDefault()
+    console.log()
+    let select = document.querySelector('.form-select-edit')
+
 
     expId = parseInt(e.target.parentElement.parentElement.id).toString()
     editedExpense = {
         description: e.target.description.value,
         amount: e.target.amount.value,
         date: e.target.date.value,
-        categoryId: e.target.children[6].value,
-        userId: expId
+        categoryId: select.options[select.selectedIndex].value,
+        userId: User.id
     }
 
     fetch(`http://localhost:3000/expenses/${expId}`,{
@@ -168,17 +174,8 @@ function handleExpenseEdit(e) {
         body: JSON.stringify(editedExpense)})
         .then(res => res.json())
         .then(exp => {
-            let oldTr = document.getElementById(`expense-${expId}`)
-
-            oldTr.childen[0].innerHTML = exp.description
-            oldTr.childen[1].innerHTML = exp.amount
-            oldTr.childen[2].innerHTML = exp.date
-            oldTr.childen[3].innerHTML = exp.categoryId
-
-
-
+            getUserExpenses(User)
             buildGroupedExpenses(User)
-
         })
 }
 

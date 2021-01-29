@@ -104,6 +104,11 @@
     <div class = 'edit expense hidden'>
         <div id = 'edit-expense'>
             <form id = "expense-form-edit">
+                <select class="form-select-edit" aria-label="Category">
+                    <option selected>Select a category</option>
+
+                </select>
+                <br>
                 <input
                         type="text"
                         name="description"
@@ -121,17 +126,14 @@
                 />
                 <br />
                 <input
-                        type="text"
+                        type="date"
                         name="date"
                         value=""
-                        placeholder="Date: mm/dd/yyyy"
                         class="input-text"
+                        data-date-inline-picker="true"
                 />
                 <br />
-                <select class="form-select-edit" aria-label="Category">
-                    <option selected>Select a category</option>
 
-                </select>
                 <input
                         type="submit"
                         name="submit"
