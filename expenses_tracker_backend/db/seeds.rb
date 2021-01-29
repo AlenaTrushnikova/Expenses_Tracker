@@ -70,7 +70,4 @@ e220 = Expense.create(amount: 30.00, date: "2021-01-28", description: "Bridge To
 
 
 
-
-
-
 puts 'done'
