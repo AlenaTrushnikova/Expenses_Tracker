@@ -61,6 +61,7 @@ function getUserExpenses(user) {
 function addExpenseToTable(expense) {
     let tableBody = document.getElementById('expenses-table-body')
     let tr = document.createElement('tr')
+    let tdEditForm = document.createElement('td')
 
     let description = document.createElement('td')
     let amount = document.createElement('td')
@@ -76,6 +77,8 @@ function addExpenseToTable(expense) {
     deleteBtn.addEventListener('click', () => deleteExpense(expense.id))
     editBtn.addEventListener('click', () => displayEditExpense(expense))
 
+    tdEditForm.id = `${expense.id}-exp-edit`
+    tdEditForm.className = `hidden edit td`
     tr.id = `expense-${expense.id}`
     editBtn.id = `edit-exp-${expense.id}`
     editBtn.className = "btn btn-outline-success btn-sm"
@@ -85,13 +88,20 @@ function addExpenseToTable(expense) {
     editBtn.textContent = 'Edit'
     deleteBtn.textContent = 'Delete'
 
+    //Changing Date display
+    const d = new Date(expense.date);
+    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
+    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+
+
     description.textContent = expense.description
     amount.textContent = convertMoney(expense.amount)
-    date.textContent = expense.date
+    date.textContent = `${da} ${mo}, ${ye}`
     category.textContent = expense.category.name
     tdEditBtn.append(editBtn)
     tdDeleteBtn.append(deleteBtn)
-    tr.append(description, amount, date, category, tdEditBtn, tdDeleteBtn)
+    tr.append(category, description, amount, date, tdEditBtn, tdDeleteBtn, tdEditForm)
     tableBody.appendChild(tr)
 }
 
@@ -112,8 +122,64 @@ function builEditExpenseForm(expense){
     //expEditForm.
 }
 
-function displayEditExpense(){
-    console.log('In progress')
+
+function displayEditExpense(expense) {
+    let hiddenTd = document.getElementById(`${expense.id}-exp-edit`)
+
+    if (hiddenTd.classList.contains("hidden")) {
+        let editExpForm = document.getElementById('edit-expense')
+
+        // editExpForm.id = `${expense.id}`
+        editExpForm.id = `exp-edit-form-${expense.id}`
+        editExpForm.addEventListener('submit', handleExpenseEdit)
+        editExpForm.className = 'exp-edit'
+        hiddenTd.append(editExpForm)
+        hiddenTd.className = 'edit td'
+    } else {
+        let editExpForm = document.getElementById(`exp-edit-form-${expense.id}`)
+        editExpForm.id = `edit-expense`
+        let body = document.querySelector('#body')
+        body.append(editExpForm)
+        hiddenTd.className = 'hidden edit td'
+
+        hiddenTd.innerHTML = ''
+    }
+
+}
+
+function handleExpenseEdit(e) {
+    e.preventDefault()
+
+    expId = parseInt(e.target.parentElement.parentElement.id).toString()
+    editedExpense = {
+        description: e.target.description.value,
+        amount: e.target.amount.value,
+        date: e.target.date.value,
+        categoryId: e.target.children[6].value,
+        userId: expId
+    }
+
+    fetch(`http://localhost:3000/expenses/${expId}`,{
+        method:'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify(editedExpense)})
+        .then(res => res.json())
+        .then(exp => {
+            let oldTr = document.getElementById(`expense-${expId}`)
+
+            oldTr.childen[0].innerHTML = exp.description
+            oldTr.childen[1].innerHTML = exp.amount
+            oldTr.childen[2].innerHTML = exp.date
+            oldTr.childen[3].innerHTML = exp.categoryId
+
+
+
+            buildGroupedExpenses(User)
+
+        })
 }
 
 //Delete Expenses and Update TWO tables (expenses by categories and detailed Info)
@@ -129,50 +195,53 @@ function deleteExpense(expenseId){
         })
 }
 
-//Add new expense Form
+// Add new expense Form
 
-
-function addEventListenerToExpenseForm(user){
-    let form = document.getElementById("expense-form")
-    form.id = user.id
-    form.addEventListener('submit', handleExpenseSubmit)
-}
-function addCategoriesToForm(){
+//Categories Options
+function addCategoriesToForm() {
     fetch(CATEGORIES_URL)
         .then(res => res.json())
         .then(categories => {
-            categories.forEach(cat => addCategory(cat))
+            categories.forEach(category => {
+                let select = document.querySelector('.form-select')
+                let option = document.createElement('option')
+                option.value = category.id
+                option.textContent = category.name
+                select.appendChild(option)
+
+                let selectEdit = document.querySelector('.form-select-edit')
+                let optionEdit = document.createElement('option')
+
+                optionEdit.value = category.id
+                optionEdit.textContent = category.name
+
+                selectEdit.appendChild(optionEdit)
+            })
         })
 }
 
-function addCategory(category){
-    let select = document.querySelector('.form-select')
-    let option = document.createElement('option')
+function addEventListenerToExpenseForm(user){
+    let form = document.querySelector("#expense-form")
+    form.addEventListener('submit', function (e) {
+        e.preventDefault()
+        let select = document.querySelector('.form-select')
 
-    option.value = category.id
-    option.textContent = category.name
+        let newAmount = (e.target.amount.value === '') ? 0.00 : e.target.amount.value
+        let newDate = (e.target.date.value === '') ? Date() : e.target.date.value
 
-    select.appendChild(option)
-}
+        let newExpense = {
+                categoryId: select.options[select.selectedIndex].value,
+                userId: User.id,
+                description: e.target.description.value,
+                amount: newAmount,
+                date: newDate
+            }
 
-function handleExpenseSubmit(e){
-    e.preventDefault()
-    let id = parseInt(e.target.id)
+        addNewExpense(newExpense)
 
-    let newExpense = {
-        categoryId: parseInt(e.target.children[7].value),
-        userId: id,
-        description: e.target.description.value,
-        amount: parseFloat(e.target.amount.value),
-        date: e.target.date.value
-    }
-
-    addNewExpense(newExpense)
-
-    e.target.description.value = ''
-    e.target.amount.value = ''
-    e.target.date.value = ''
-    e.target.children[7].value = 'Select a category'
+        //Update the form
+        form.reset()
+    })
 }
 
 function addNewExpense(expense){
@@ -203,7 +272,7 @@ function displayBudget(user) {
 }
 function handleEdit (){
     let budgetForm = document.querySelector('.budget')
-    if (budgetForm.classList.contains("hidden") == true) {
+    if (budgetForm.classList.contains("hidden")) {
         budgetForm.className = "budget flex"
     } else
         budgetForm.className = "budget hidden"
@@ -366,3 +435,4 @@ function drawChart(categories) {
         }
     });
 }
+

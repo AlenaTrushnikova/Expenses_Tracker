@@ -10,7 +10,7 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script defer src='src/index.js'></script>
 </head>
-<body class="bg-dark text-light">
+<body class="bg-dark text-light" id="body">
 
 <header>
     <nav class="navbar navbar-light bg-dark">
@@ -79,47 +79,69 @@
     </div>
 
     <!--    Add an expense Form-->
-    <div id='form-expense'>
-        <form id="expense-form">
-            <h3>Add an expense</h3>
+    <div class="container px-5" id='form-expense'>
+            <div class="d-flex justify-content-center" style="width: -moz-fit-content">
+                <h3>Add an expense</h3>
+            </div>
 
-            <input
-                    type="text"
-                    name="description"
-                    value=""
-                    placeholder="Enter a description"
-                    class="input-text"
-            />
-            <br/>
-            <input
-                    type="float"
-                    name="amount"
-                    value=""
-                    placeholder="Enter an amount"
-                    class="input-text"
-            />
-            <br/>
-            <input
-                    type="text"
-                    name="date"
-                    value=""
-                    placeholder="Date: mm/dd/yyyy"
-                    class="input-text"
-            />
-            <br/>
-            <select class="form-select" aria-label="Category">
-                <option selected>Select a category</option>
-
-            </select>
-            <input
-                    type="submit"
-                    name="submit"
-                    value="Add Expense"
-                    class="submit"
-            />
-        </form>
+            <form id="expense-form" class="input-group d-flex justify-content-center">
+                <select class="form-select" >
+                    <option selected>Select a category</option>
+                </select>
+                &nbsp;
+                <input type="text" name="description" value="" placeholder="Description" class="input-text">
+                &nbsp;
+                <span class="input-group-text">$</span>
+                <input type="float" name="amount" value="" placeholder="10.00" class="input-text">
+                &nbsp;
+                <input type="date" name="date" data-date-inline-picker="true" />
+                &nbsp; &nbsp;
+                <input type="submit" name="submit" value="Add Expense" class="submit btn btn-success">
+            </form>
     </div>
-    <br>
+    <br><br><br>
+    <!--Edit expense Form-->
+    <div class = 'edit expense hidden'>
+        <div id = 'edit-expense'>
+            <form id = "expense-form-edit">
+                <input
+                        type="text"
+                        name="description"
+                        value=""
+                        placeholder="Enter a description"
+                        class="input-text"
+                />
+                <br />
+                <input
+                        type="float"
+                        name="amount"
+                        value=""
+                        placeholder="Enter an amount"
+                        class="input-text"
+                />
+                <br />
+                <input
+                        type="text"
+                        name="date"
+                        value=""
+                        placeholder="Date: mm/dd/yyyy"
+                        class="input-text"
+                />
+                <br />
+                <select class="form-select-edit" aria-label="Category">
+                    <option selected>Select a category</option>
+
+                </select>
+                <input
+                        type="submit"
+                        name="submit"
+                        value="Edit Expense"
+                        class="submit"
+                />
+            </form>
+        </div>
+    </div>
+
 
     <!--    Expenses by category-->
     <div class="container" id="grouped-expenses">
@@ -154,10 +176,10 @@
         <table class="table table-dark table-sm">
             <thead>
             <tr>
-                <th style="width:15%" scope="col">Description</th>
+                <th style="width:30%" scope="col">Category</th>
+                <th style="width:20%" scope="col">Description</th>
                 <th style="width:15%" scope="col">Amount</th>
                 <th style="width:15%" scope="col">Date</th>
-                <th style="width:35%" scope="col">Category</th>
                 <th style="width:10%" scope="col"></th>
                 <th style="width:10%" scope="col"></th>
             </tr>
